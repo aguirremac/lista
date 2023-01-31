@@ -12,7 +12,7 @@ const Note = (props) => {
   return (
     <div>
       
-    <div className='w-full flex gap-10 pt-6 flex-wrap flex-start pl-10'>
+    <div className='w-full flex gap-10 pt-6 flex-wrap flex-start pl-10 z-11 absolute'>
      
       {props.notes.map((item, idNumber) => {
         return(
