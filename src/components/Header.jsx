@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {BsPlusSquareDotted} from 'react-icons/bs';
+import {AiOutlineCloseCircle} from 'react-icons/ai';
 
 
 
@@ -14,9 +15,10 @@ return (
     <h1 className="tracking-widest  text-5xl pl-2 ">Lista</h1>
     </div>
 
-    <div onClick={props.handleClick} className="flex items-center  gap-5 cursor-pointer hover:scale-105">
-    <BsPlusSquareDotted size={40}  className=" "/>
-        <p className="text-2xl cursor-pointer ">Add Note</p>
+    <div onClick={props.handleClick} className="flex items-center  gap-2 cursor-pointer hover:scale-105">
+    {props.addNoteStatus ? <AiOutlineCloseCircle size={30}  className=" "/> :
+    <BsPlusSquareDotted size={30}  className=" "/>}
+        <p className="text-2xl cursor-pointer ">{props.addNoteStatus ? 'Close' : 'Add Note'}</p>
     </div>
     </header>
 )

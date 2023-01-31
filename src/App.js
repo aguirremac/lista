@@ -39,7 +39,7 @@ const handleAdd = (input) => {
 
   return (
     <div>
-      <Header handleClick={showInput}/>
+      <Header handleClick={showInput} addNoteStatus={addNote}/>
       <div style={{opacity: addNote ? 0.8 : 0}} className="bg-black w-full h-screen">
       {addNote && <Input onAdd={handleAdd} handleClick={showInput}/>}
       <Note notes={notes} onDelete={handleDelete} />
