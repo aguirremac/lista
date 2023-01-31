@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
 const Input = (props) => {
-  const [input, setInput] = useState({ title: '', content: '', noteColor:"" });
+  
+  const [input, setInput] = useState({ title: '', content: '', noteColor:'#fffd8d'});
+  const [bgColor, setBgColor] = useState('#fffd8d');
+  
 
   
 
   const handleChange = (e) => {
+    e.preventDefault()
     const { value, name } = e.target;
 
     setInput((prevValue) => {
@@ -19,17 +23,25 @@ const Input = (props) => {
 
   const onSubmit = () => {
     props.onAdd(input);
-    setInput({ title: '', content: '', noteColor:"" });
+    setInput({ title: '', content: '', noteColor: input.noteColor});
   };
-
-
-  const [bgColor, setBgColor] = useState('#fffd8d');
 
   const changeColor = (newColor) => {
+
     setBgColor(newColor);
 
+    setInput((prevValue) => {
+        return {
+          ...prevValue,
+          noteColor: newColor
+        };
+      });
+    
   };
+
  
+ 
+  console.log(input)
 
   return (
     <div>
@@ -54,7 +66,7 @@ const Input = (props) => {
             placeholder="Take a note.."
             className="w-full h-[100px] bg-transparent outline-none whitespace-pre-wrap placeholder-black/50"
           />
-          <ColorPicker selectColor = {changeColor} />
+          <ColorPicker onClick={handleChange} selectColor = {changeColor} name='noteColor' />
           <button
             onClick={onSubmit}
             className="rounded-full text-sm font-bold text-white bg-yellow-500 w-[70px] h-[50px] absolute right-5 -bottom-3 cursor-pointer hover:scale-105"

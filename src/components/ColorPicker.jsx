@@ -11,7 +11,7 @@ const ColorPicker = (props) => {
 
   return ( 
   <div>
-  <button onClick={() => setColorChange(!colorChange)} className="text-sm text-black/80 font-bold rounded-lg w-[120px] border border-black/40 absolute right-3 top-3">Change Color</button>
+  <button onClick={() => setColorChange(!colorChange)} className="text-sm text-black/80 font-bold rounded-lg w-[150px] border border-black/40 absolute right-3 top-3 flex justify-center items-center"><span><img className='h-[17px] pr-2' src="https://cdn-icons-png.flaticon.com/512/4508/4508394.png"></img></span>Change Color</button>
           <ul style={{ display: colorChange && 'flex' }} className="hidden bg-black/30 w-[300px] justify-center gap-2 p-2 rounded-lg absolute top-10 right-3">
             {colors.map((item, index) => {
               return (
