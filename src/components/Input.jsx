@@ -43,9 +43,6 @@ const Input = (props) => {
     
   };
 
- 
- 
-  console.log(input)
 
   return (
     <div>
