@@ -10,6 +10,7 @@ import { useState } from 'react';
 const App = () => {
 
 const [notes, setNotes]= useState ([])
+const [addNote, setAddNote] = useState(false)
 
 const handleAdd = (input) => {
   setNotes(prevNotes => {
@@ -30,14 +31,20 @@ const handleAdd = (input) => {
    }
 
 
+   const showInput = () => {
+    setAddNote(!addNote)
+   }
+
 
 
   return (
-    <div >
-      <Header/>
-      <Input onAdd={handleAdd}/>
+    <div>
+      <Header handleClick={showInput} addNoteStatus={addNote}/>
+      <div style={{opacity: addNote ? 0.8 : 0}} className="bg-black w-full h-screen">
+      {addNote && <Input onAdd={handleAdd} handleClick={showInput}/>}
       <Note notes={notes} onDelete={handleDelete} />
       <Footer />
+      </div>
       </div>
     
   );
