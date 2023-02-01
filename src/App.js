@@ -4,6 +4,8 @@ import Note from './components/Note';
 import Input from './components/Input';
 import { useState } from 'react';
 import Landing from './components/Landing';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -19,7 +21,8 @@ const handleAdd = (input) => {
     return [
       ...prevNotes, input
     ]
-  })}
+  }); notify()
+}
  
 
 
@@ -42,6 +45,24 @@ const handleAdd = (input) => {
     setStart(true)
   }
 
+  // toastify
+ 
+  const notify = () => {
+    toast.success('Note Added!', {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
+
+
+
+
 
   return (
     <div >
@@ -49,7 +70,8 @@ const handleAdd = (input) => {
       {start && <Header handleClick={showInput} addNoteStatus={addNote}/> }
       {addNote && <Input onAdd={handleAdd} handleClick={showInput}/>}
       {start &&  <Note notes={notes} onDelete={handleDelete}/> }
-      <Footer /> 
+      <Footer />
+      <ToastContainer /> 
       </div>
       
     
