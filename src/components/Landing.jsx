@@ -8,12 +8,12 @@ const [start, setStart] = useState(false);
     <div className=''>
       <div className="relative w-full h-screen flex justify-center items-center">
         
-        <div className='absolute z-20 flex flex-col items-center gap-4'>
+        <div className='absolute z-20 flex flex-col items-center gap-7'>
            <div className='flex items-center justify-center  gap-2' >
-            <img  className="h-[150px]" src="https://img.icons8.com/fluency/512/sticky-notes.png" alt="logo"></img>
-            <h1 className='text-9xl text-white font-mont font-bold '>Lista</h1>
+            <img  className=" h-[50px] md:h-[150px]" src="https://img.icons8.com/fluency/512/sticky-notes.png" alt="logo"></img>
+            <h1 className='text-5xl md:text-9xl text-white font-mont font-bold '>Lista</h1>
             </div> 
-            <button onClick={props.onClick} className='border border-white rounded-xl text-4xl p-3 justify-center hover:bg-yellow-500/60 hover:scale-105 focus:border-yellow-300 focus:border-4 duration-100 text-white'>Get Started</button>
+            <button onClick={props.onClick} className='border border-white rounded-xl text-xs md:text-4xl p-3 font-mont justify-center hover:bg-yellow-500/60 hover:scale-105 focus:border-yellow-300 focus:border-4 duration-100 text-white'>Get Started</button>
 
         </div>
 
