@@ -50,10 +50,14 @@ const Input = (props) => {
   return (
     <div>
         
-      <div className="font-mont justify-center py-3 flex absolute top-[100px] right-10 z-10 drop-shadow-2xl">
+      <div className="font-mont justify-center flex z-10 drop-shadow-2xl w-full h-screen absolute">
+        {/* backdrop */}
+        <div className="w-full h-screen bg-black/80">
+        </div>
+        
         <div
           style={{ backgroundColor: bgColor }}
-          className="w-[500px] h-[400px] px-4 py-2  relative flex flex-col rounded-xl "
+          className="w-[400px] h-[500px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-5"
         >
             <IoMdClose size={25} onClick={props.handleClick} className="absolute right-3 cursor-pointer hover:text-red-600"/>
           <input
