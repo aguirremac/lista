@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Note from './components/Note';
 import Input from './components/Input';
 import { useState } from 'react';
+import Landing from './components/Landing';
 
 
 
@@ -11,6 +12,7 @@ const App = () => {
 
 const [notes, setNotes]= useState ([])
 const [addNote, setAddNote] = useState(false)
+const [start, setStart] = useState(false);
 
 const handleAdd = (input) => {
   setNotes(prevNotes => {
@@ -36,13 +38,18 @@ const handleAdd = (input) => {
    }
 
 
+  const  handleStart = () => {
+    setStart(true)
+  }
+
 
   return (
     <div >
-      <Header handleClick={showInput} addNoteStatus={addNote}/>
+      {!start && <Landing onClick ={handleStart}/>}
+      {start && <Header handleClick={showInput} addNoteStatus={addNote}/> }
       {addNote && <Input onAdd={handleAdd} handleClick={showInput}/>}
-      <Note notes={notes} onDelete={handleDelete}/>
-      <Footer />
+      {start &&  <Note notes={notes} onDelete={handleDelete}/> }
+      <Footer /> 
       </div>
       
     
