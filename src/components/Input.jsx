@@ -52,9 +52,9 @@ const Input = (props) => {
   return (
     <div>
         
-      <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute">
+      <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute ">
         {/* backdrop */}
-        <div className="w-full h-screen bg-black/80">
+        <div className="w-full h-screen bg-black/80  overflow-auto">
         </div>
         
         <div
@@ -79,7 +79,7 @@ const Input = (props) => {
             className="w-full h-[175px] md:h-[300px] bg-transparent outline-none whitespace-pre-wrap placeholder-black/50 text-[12px] md:text-lg"
           />
           <ColorPicker onClick={handleChange} selectColor = {changeColor} name='noteColor' />
-          <button
+          <button disabled = {!input.content || !input.title}
             onClick={onSubmit}
             className="rounded-full text-xs md:text-lg font-bold text-white bg-yellow-500 w-[50px] h-[35px] md:w-[70px] md:h-[50px] absolute right-5 -bottom-3 cursor-pointer hover:scale-105"
           >
