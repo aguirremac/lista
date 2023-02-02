@@ -6,7 +6,7 @@ import { IoMdClose } from 'react-icons/io';
 
 const Input = (props) => {
   
-  const [input, setInput] = useState({ title: '', content: '', noteColor:'#fffd8d'});
+  const [input, setInput] = useState({ title: '', content: '', noteColor:'#fffd8d', dateTime: ""});
   const [bgColor, setBgColor] = useState('#fffd8d');
   
   
@@ -16,20 +16,17 @@ const Input = (props) => {
   const handleChange = (e) => {
     e.preventDefault()
     const { value, name } = e.target;
+    const date = new Date().toLocaleString();
 
     setInput((prevValue) => {
       return {
         ...prevValue,
-        [name]: value,
+        [name]: value, dateTime: date
       };
     });
   };
 
-  const onSubmit = () => {
-    props.onAdd(input);
-    setInput({ title: '', content: '', noteColor: input.noteColor});
-  };
-
+  
   const changeColor = (newColor) => {
 
     setBgColor(newColor);
@@ -42,6 +39,14 @@ const Input = (props) => {
       });
     
   };
+
+
+  const onSubmit = () => {
+    props.onAdd(input);
+    setInput({ title: '', content: '', noteColor: input.noteColor, dateTime:''});
+  };
+
+
 
 
   return (

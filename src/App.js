@@ -24,7 +24,7 @@ const handleAdd = (input) => {
   }); notify()
 }
  
-
+console.log(notes);
 
   const handleDelete = (idNumber) => {
     console.log(idNumber)
