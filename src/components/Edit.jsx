@@ -18,7 +18,7 @@ const Edit = (props) => {
           className="absolute top-3 right-3 hover:text-red hover:scale-125 text-lg md:text-xl cursor-pointer"
         />
         <div contentEditable={editable} className="p-2 mt-5  outline-gray-700 rounded-xl ">
-        <h2  onClick={()=>setEditable(true)} className="font-bold text-xl cursor-text outline-none ">{props.zoomDetails.title}</h2>
+        <h2  onClick={()=>setEditable(true)} className="font-bold text-xl cursor-text outline-none break-all ">{props.zoomDetails.title}</h2>
 
         <div>
           <p  onClick={()=>setEditable(true)} className="pt-3 min-h-[450px] cursor-text outline-none">{props.zoomDetails.content}</p>
