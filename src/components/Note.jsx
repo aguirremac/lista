@@ -28,13 +28,12 @@ const Note = (props) => {
                   }}
                   className="absolute top-3 right-3 text-[15px] md:text-[20px] text-gray-600 cursor-pointer hover:text-red-700 hover:scale-125"
                 />
-             
-                <h1 className="font-bold whitespace-pre-wrap text-xs md:text-xl pb-2 ">
+               <h2 className="font-bold  text-xs md:text-xl pb-2 truncate max-w-[130px] md:max-w-[240px]">
                   {item.title}
-                </h1>
-                
-                <div className='md:h-[170px] h-[110px] overflow-hidden'>
-                <p className="h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed">
+                </h2>
+            
+                <div className='md:h-[170px] h-[110px] truncate'>
+                <p className="h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed ">
                   {item.content}
                 </p>
                 </div>
