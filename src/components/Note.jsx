@@ -24,7 +24,7 @@ const Note = (props) => {
               >
                 <RiDeleteBin6Line
                   onClick={() => {
-                    props.onDelete(idNumber);
+                    props.onDelete(idNumber); 
                   }}
                   className="absolute top-3 right-3 text-[15px] md:text-[20px] text-gray-600 cursor-pointer hover:text-red-700 hover:scale-125"
                 />
