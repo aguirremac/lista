@@ -7,6 +7,7 @@ import Landing from './components/Landing';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Edit from './components/Edit';
+import Login from './components/Login';
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -70,8 +71,8 @@ const App = () => {
     <div>
       
       {!start ? <Landing onClick={handleStart} /> : ( <>
+      <Login />
 
-      
       <Header handleClick={showInput} addNoteStatus={addNote} />
       {addNote && <Input onAdd={handleAdd} handleClick={showInput} />}
        <Note
