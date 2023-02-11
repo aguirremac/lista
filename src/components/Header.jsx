@@ -11,7 +11,7 @@ const Header = (props) => {
 return (
  <header className="bg-[#51bcb3] text-white mx-auto p-4 font-semibold font-mont flex justify-between md:px-10">
     <div className="flex items-center ">
-    <img src="https://img.icons8.com/fluency/512/sticky-notes.png" className="h-[25px] md:h-[50px]"></img>
+    <img src="https://img.icons8.com/fluency/512/sticky-notes.png" className="h-[25px] md:h-[50px]" alt="Lista Logo"></img>
     <h1 className="tracking-widest text-xl md:text-5xl pl-2 ">Lista</h1>
     </div>
 
