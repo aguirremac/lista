@@ -6,7 +6,7 @@ import { auth } from '../../config/firebase';
 
 const style = {
     container: `relative flex flex-col  justify-center items-center h-screen mx-auto w-full bg-gradient-to-r from-cyan-300 to-blue-300 font-mont`,
-    form: `bg-slate-500/50  flex flex-col justify-center items-center w-[500px] h-[200px] rounded-xl gap-2 p-3 px-10`,
+    form: `bg-slate-500/50 text-sm md:text-md   flex flex-col justify-center items-center w-[300px] h-[200px] md:w-[500px] md:h-[200px] rounded-xl gap-2 p-3 px-10`,
     titleDiv: `absolute bottom-1 right-3 flex items-center justify-center  gap-2 mb-5`,
     icon: `h-[13px] md:h-[40px]`,
     lista: `text-xl md:text-2xl text-black/60  font-mont font-bold`,

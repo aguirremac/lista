@@ -8,13 +8,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const style = {
   container: ` relative flex flex-col  justify-center items-center h-screen mx-auto w-full bg-gradient-to-r from-cyan-800 to-blue-800 font-mont`,
-  form: `bg-slate-300/40  flex flex-col justify-center items-center w-[500px] h-[400px] rounded-xl gap-2 p-3 px-10`,
+  form: `bg-slate-300/40 text-sm md:text-md  flex flex-col justify-center items-center w-[300px] h-[400px] md:w-[500px] md:h-[400px] rounded-xl gap-2 p-3 px-10`,
   titleDiv: `absolute bottom-1 right-3 flex items-center justify-center  gap-2 mb-5`,
-  icon: `h-[13px] md:h-[40px]`,
+  icon: `h-[25px] md:h-[40px]`,
   lista: `text-xl md:text-2xl text-black/60  font-mont font-bold`,
   signUpText: `font-bold text-lg `,
-  email: ` w-full rounded-md p-3  `,
-  password: ` w-full rounded-md p-3`,
+  email: ` w-full rounded-md md:p-3 p-2  `,
+  password: ` w-full rounded-md md:p-3 p-2`,
   button: `p-2 border border-2 border-black/40 rounded-md text-center mt-4 hover:border-black hover:bg-cyan-800 font-bold w-full`,
   dontMatch: `text-sm text-red-900 font-bold`,
   match: `text-sm text-green-700 font-bold`,
