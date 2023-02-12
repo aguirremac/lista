@@ -56,7 +56,7 @@ const Input = (props) => {
 
         <div
           style={{ backgroundColor: bgColor }}
-          className="w-[200px] h-[250px] md:w-[400px] md:h-[500px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-5"
+          className="w-[300px] h-[400px] md:w-[400px] md:h-[500px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-5"
         >
           <IoMdClose
             size={25}

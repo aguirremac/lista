@@ -29,13 +29,14 @@ const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [confirmPassword, setConfirmPassword] = useState('');
 
+
 const navigate = useNavigate();
 
 const handleSubmit = (e) => {
   e.preventDefault();
   createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-    navigate('/signin')
-    // console.log(userCredential);
+    navigate('/enterName')
+    console.log(userCredential);
   }).catch(error => {
     console.log(error)
   })
@@ -60,6 +61,7 @@ const handleSubmit = (e) => {
           <h1 className={style.lista}>Lista - Note Keeper</h1>
         </div>
             <p className={style.signUpText}>Create New Account</p>
+  
               <input onChange={(e)=>setEmail(e.target.value)} className={style.email} type="email" placeholder='Email' value={email} required></input>
               <input onChange={(e)=>setPassword(e.target.value)} className={style.password} type="password" placeholder='Password' value={password} required></input>
               <input onChange={(e)=>setConfirmPassword(e.target.value)} className={style.password} type="password" placeholder='Confirm Password' value={confirmPassword} required></input>

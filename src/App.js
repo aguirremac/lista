@@ -10,6 +10,9 @@ import Edit from './components/Edit';
 import SignIn from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
 import {  Route, Link, Routes} from 'react-router-dom';
+import AuthListen from './components/Auth/AuthListen';
+import Name from './components/Auth/Name';
+
 
 
 
@@ -18,6 +21,7 @@ const App = () => {
   const [addNote, setAddNote] = useState(false);
   const [seeMore, setSeeMore] = useState([]);
   const [isSeeMore, setIsSeeMore] = useState(false);
+  const [user, setUser] = useState({});
 
 
   const handleAdd = (input) => {
@@ -59,19 +63,23 @@ const App = () => {
   const clickSeeMore = (idNumber) => {
     setSeeMore(notes[idNumber]);
     setIsSeeMore(true);
-    console.log(isSeeMore);
+    
   };
 
   const zoomOff = (x) => {
     setIsSeeMore(x);
   };
 
+  const handleCurrentUser = (currentUser) => {
+    setUser(currentUser)
+    
+  }
+  // console.log(user.displayName)
+
+ 
 
 
-  // const handleUserDetails= (userDetails) => {
-  //   setIsLoggedIn(true);
-  //   console.log(isLoggedIn);
-  // };
+
 
   return (
     
@@ -82,12 +90,11 @@ const App = () => {
         <Route path="/" element={<Landing /> } />
         <Route path="/signin" element={<SignIn /> } />
         <Route path="/signup" element={<SignUp /> } /> 
+        <Route path="/enterName" element={<Name /> } /> 
         <Route path='/dashboard' element={ <>
-         <Header handleClick={showInput}  />
-         </>} />
-         <Route path="/input" element={<>
+         <Header handleClick={showInput} user={user} />
+         <AuthListen handleCurrentUser={handleCurrentUser}/>
          {addNote && <Input onAdd={handleAdd} handleClick={showInput} />}
-         <Header handleClick={showInput}  />
          <Note
                 notes={notes}
                 onDelete={handleDelete}
@@ -96,6 +103,11 @@ const App = () => {
               {isSeeMore && <Edit zoomDetails={seeMore} zoomOff={zoomOff} />}
               <Footer />
               <ToastContainer /> 
+         </>} />
+         <Route path="/input" element={<>
+         
+         {/* <Header handleClick={showInput} displayName={user.displayName}  /> */}
+         
          
          
           </>} />
