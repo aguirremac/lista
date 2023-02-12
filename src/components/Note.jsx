@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
+
 const style = {
   noteContainer: `w-full flex justify-evenly xl:justify-start gap-y-3 xl:gap-4 pt-3 md:pt-6 flex-wrap flex-start pb-2 md:px-5 xl:px-5 z-11 absolute`,
   note: `font-mont w-[170px] h-[180px] md:h-[250px] md:w-[300px]  overflow-hidden  shadow-xl rounded-xl cursor-pointer hover:scale-105 duration-200`,

@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../config/firebase';
 
 
 
-const AuthDetails = ({handleAuth}) => {
+
+const AuthDetails = () => {
     
-    const [useDetails, setUserDetails] = useState(null);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(()=>{
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user)=> {
-            if (user){
-                setUserDetails(user)
-                handleAuth(useDetails)
-                console.log(useDetails)
-            }else {
-                setUserDetails(null)
-            }
-    })
+        
+     onAuthStateChanged(auth, (user)=> {
+        if (user) {
+           setCurrentUser(user.uid)
+           console.log(currentUser)
+        }else {
+            //user is signed out
+        }
+            
+    });
 
     },[])
+
+    
 
 
   return (

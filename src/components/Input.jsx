@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
-import Header from './Header';
+
 import { IoMdClose } from 'react-icons/io';
 
 const Input = (props) => {
@@ -50,6 +50,7 @@ const Input = (props) => {
   return (
     <div>
       <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute ">
+        
         {/* backdrop */}
         <div className="w-full h-screen bg-black/80  overflow-auto"></div>
 

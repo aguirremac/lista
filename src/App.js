@@ -7,19 +7,18 @@ import Landing from './components/Landing';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Edit from './components/Edit';
-import SignIn from './components/auth/SignIn';
-import SignUp from './components/auth/SignUp';
-import AuthDetails from './components/auth/AuthDetails';
-import { BrowserRouter, Routes } from 'react-router-dom';
+import SignIn from './components/Auth/SignIn';
+import SignUp from './components/Auth/SignUp';
+import {  Route, Link, Routes} from 'react-router-dom';
+import AddNote from './components/AddNote';
+
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
-  const [start, setStart] = useState(false);
   const [seeMore, setSeeMore] = useState([]);
   const [isSeeMore, setIsSeeMore] = useState(false);
-  const [register, setRegister] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   const handleAdd = (input) => {
     setNotes((prevNotes) => {
@@ -40,9 +39,7 @@ const App = () => {
     setAddNote(!addNote);
   };
 
-  const handleStart = () => {
-    setStart(true);
-  };
+ 
 
   // toastify
 
@@ -69,55 +66,52 @@ const App = () => {
     setIsSeeMore(x);
   };
 
-  const handleSignUp = () => {
-    setRegister(!register);
-  };
 
-  const handleAuth = (userDetails) => {
-    setIsLoggedIn(true);
-    console.log(isLoggedIn);
-  };
 
-  const handleUserDetails= (userDetails) => {
-    setIsLoggedIn(true);
-    console.log(isLoggedIn);
-  };
+  // const handleUserDetails= (userDetails) => {
+  //   setIsLoggedIn(true);
+  //   console.log(isLoggedIn);
+  // };
 
   return (
+    
     <div>
-      {!start ? (
-        <Landing handleStart={handleStart} />
-      ) : (
-        <>
-          
-          
-          {!isLoggedIn ? (
-            <>
-              {' '}
-              {!register ? (
-                <SignIn handleSignUp={handleSignUp} handleUserDetails={handleUserDetails} />
-              ) : (
-                <SignUp handleSignUp={handleSignUp} handleUserDetails={handleUserDetails} />
-              )}{' '}
-            </>
-          ) : (
-            <>
-              <Header handleClick={showInput} addNoteStatus={addNote} />
-              {addNote && <Input onAdd={handleAdd} handleClick={showInput} />}
-              <Note
+    
+
+      <Routes>
+        <Route path="/" element={<Landing /> } />
+        <Route path="/signin" element={<SignIn /> } />
+        <Route path="/signup" element={<SignUp /> } /> 
+        <Route path='/dashboard' element={ <>
+         <Header handleClick={showInput}  />
+         <AddNote />
+         </>} />
+         <Route path="/input" element={<>
+         {addNote && <Input onAdd={handleAdd} handleClick={showInput} />}
+         <Header handleClick={showInput}  />
+         <Note
                 notes={notes}
                 onDelete={handleDelete}
                 clickSeeMore={clickSeeMore}
               />
               {isSeeMore && <Edit zoomDetails={seeMore} zoomOff={zoomOff} />}
               <Footer />
-              <ToastContainer />
-            </>
-          )}
-        </>
-      )}
+              <ToastContainer /> 
+         
+         
+          </>} />
+             
+             
+
+      
+         
+          
+      </Routes>
+            
     </div>
-  );
+   
+  )
 };
+
 
 export default App;
