@@ -7,11 +7,12 @@ import Landing from './components/Landing';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Edit from './components/Edit';
-import SignIn from './components/Auth/SignIn';
-import SignUp from './components/Auth/SignUp';
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
 import {  Route, Link, Routes} from 'react-router-dom';
-import AuthListen from './components/Auth/AuthListen';
-import Name from './components/Auth/Name';
+import AuthListen from './components/auth/AuthListen';
+import Name from './components/auth/Name';
+
 
 
 
