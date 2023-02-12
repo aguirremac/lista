@@ -10,7 +10,7 @@ import Edit from './components/Edit';
 import SignIn from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
 import {  Route, Link, Routes} from 'react-router-dom';
-import AddNote from './components/AddNote';
+
 
 
 const App = () => {
@@ -84,7 +84,6 @@ const App = () => {
         <Route path="/signup" element={<SignUp /> } /> 
         <Route path='/dashboard' element={ <>
          <Header handleClick={showInput}  />
-         <AddNote />
          </>} />
          <Route path="/input" element={<>
          {addNote && <Input onAdd={handleAdd} handleClick={showInput} />}
