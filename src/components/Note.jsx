@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
+
 const style = {
   noteContainer: `w-full flex justify-evenly xl:justify-start gap-y-3 xl:gap-4 pt-3 md:pt-6 flex-wrap flex-start pb-2 md:px-5 xl:px-5 z-11 absolute`,
+  empty: `flex items-center justify-center md:text-5xl font-mont font-bold text-black/30 w-full h-screen`,
   note: `font-mont w-[170px] h-[180px] md:h-[250px] md:w-[300px]  overflow-hidden  shadow-xl rounded-xl cursor-pointer hover:scale-105 duration-200`,
   textContainer: `relative px-2 md:px-5 pt-3 h-full`,
   delete: `absolute top-3 right-3 text-[15px] md:text-[20px] text-gray-600 cursor-pointer hover:text-red-700 hover:scale-125`,
@@ -15,11 +17,12 @@ const style = {
 
 const Note = (props) => {
   // const [notes, setNotes]= useState ([])
+  
 
   return (
     <div>
       <div className={style.noteContainer}>
-        {props.notes
+{props.notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : props.notes
           .map((item, idNumber) => {
             return (
               <div
@@ -61,6 +64,8 @@ const Note = (props) => {
             );
           })
           .reverse()}
+
+        
       </div>
     </div>
   );

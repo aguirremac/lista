@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
-import Header from './Header';
+
 import { IoMdClose } from 'react-icons/io';
 
 const Input = (props) => {
@@ -50,12 +50,13 @@ const Input = (props) => {
   return (
     <div>
       <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute ">
+        
         {/* backdrop */}
         <div className="w-full h-screen bg-black/80  overflow-auto"></div>
 
         <div
           style={{ backgroundColor: bgColor }}
-          className="w-[200px] h-[250px] md:w-[400px] md:h-[500px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-5"
+          className="w-[300px] h-[400px] md:w-[400px] md:h-[500px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-5"
         >
           <IoMdClose
             size={25}
