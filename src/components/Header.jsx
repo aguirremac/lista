@@ -34,7 +34,7 @@ return (
     
     <div className="flex flex-col justify-center items-end">
         <p className="text-yellow-200 text-[10px] md:text-lg">{user.displayName.toUpperCase()}</p>
-    <div onClick={handleLogOut} className="text-[10px] md:text-sm flex items-center justify-center gap-2 cursor-pointer hover:scale-105 hover:text-red-600 ">
+    <div onClick={handleLogOut} className="text-[9px] md:text-sm flex items-center justify-center gap-1 cursor-pointer hover:scale-105 hover:text-red-600 ">
     <p>Log out</p>
     <IoMdLogOut />
     </div>
