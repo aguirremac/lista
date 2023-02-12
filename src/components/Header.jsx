@@ -33,7 +33,7 @@ return (
     <div onClick={handleClick} className='flex  items-center md:gap-5 text-2xl md:text-2xl text-white font-mont font-bold hover:scale-105 cursor-pointer'><BsPlusSquareDotted /> <p className="hidden md:block ">Add Note</p></div>
     
     <div className="flex flex-col justify-center items-end">
-        <p className="text-yellow-200 text-[10px] md:text-lg">{user.displayName.toUpperCase()}</p>
+        <p className="text-yellow-200 text-[10px] md:text-lg">{user.displayName}</p>
     <div onClick={handleLogOut} className="text-[9px] md:text-sm flex items-center justify-center gap-1 cursor-pointer hover:scale-105 hover:text-red-600 ">
     <p>Log out</p>
     <IoMdLogOut />

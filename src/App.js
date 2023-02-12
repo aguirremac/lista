@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Edit from './components/Edit';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
-import {  Route, Link, Routes} from 'react-router-dom';
+import {  Route, Link, Routes, Navigate} from 'react-router-dom';
 import AuthListen from './components/auth/AuthListen';
 import Name from './components/auth/Name';
 
@@ -76,6 +76,13 @@ const App = () => {
   }
   // console.log(user.displayName)
 
+  //adding RequireAuth to not access everything
+
+  // const loggedUser = true;
+  // const RequireAuth = ({children}) => {
+  //   return loggedUser ? children : <Navigate to="/signin" />
+  // }
+
  
 
 
@@ -91,6 +98,7 @@ const App = () => {
         <Route path="/signin" element={<SignIn /> } />
         <Route path="/signup" element={<SignUp /> } /> 
         <Route path="/enterName" element={<Name /> } /> 
+        
         <Route path='/dashboard' element={ <>
          <Header handleClick={showInput} user={user} />
          <AuthListen handleCurrentUser={handleCurrentUser}/>

@@ -22,7 +22,7 @@ const AuthListen = ({handleCurrentUser}) => {
             
     });
 
-    },[currentUser])
+    },[currentUser]) //this will only run if currenUser changed
 
     
 
