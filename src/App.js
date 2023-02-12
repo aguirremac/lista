@@ -16,6 +16,7 @@ import Name from './components/auth/Name';
 
 
 
+
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
