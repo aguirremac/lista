@@ -101,7 +101,7 @@ const App = () => {
                 clickSeeMore={clickSeeMore}
               />
               {isSeeMore && <Edit zoomDetails={seeMore} zoomOff={zoomOff} />}
-              <Footer />
+              {/* <Footer /> */}
               <ToastContainer /> 
          </>} />
          <Route path="/input" element={<>
