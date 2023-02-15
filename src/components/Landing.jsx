@@ -26,7 +26,7 @@ const Landing = () => {
             <img  className={style.icon} src="https://img.icons8.com/fluency/512/sticky-notes.png" alt="logo"></img>
             <h1 className={style.name}>Lista - Note Keeper</h1>
             </div> 
-            <button  className={style.button}><Link to="/signin">Get Started </Link></button>
+            <button  className={style.button}><Link to="/login">Get Started </Link></button>
 
         </div>
 
