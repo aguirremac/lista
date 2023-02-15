@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 
+
 const style = {
   container: ` relative flex flex-col  justify-center items-center h-screen mx-auto w-full bg-gradient-to-r from-yellow-200 to-yellow-500 font-mont`,
   form: `bg-slate-600/30 text-sm md:text-md  flex flex-col justify-center items-center w-[300px] h-[400px] md:w-[500px] md:h-[400px] rounded-xl gap-2 p-3 px-10`,
@@ -18,8 +19,8 @@ const style = {
   email: ` w-full rounded-md md:p-3 p-2 outline-none  `,
   password: ` w-full rounded-md md:p-3 p-2 outline-none`,
   button: `p-2 w-full mt-2 text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-bold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2`,
-  dontMatch: `text-sm text-red-900 font-bold`,
-  match: `text-sm text-green-700 font-bold`,
+  dontMatch: `text-xs md:text-sm text-red-900 font-bold`,
+  match: `text-xs md:text-sm text-green-700 font-bold`,
   signInLink: `font-bold hover:text-green-800 cursor-pointer`,
   account: `text-sm`,
   already: `text-sm text-red-900 font-bold`,
@@ -77,7 +78,7 @@ useEffect (()=> {
               <input onChange={(e)=>setConfirmPassword(e.target.value)} className={style.password} type="password" placeholder='Confirm Password' value={confirmPassword} required></input>
               {confirmPassword && <p className={password !== confirmPassword ? style.dontMatch: style.match}>{password !== confirmPassword ? 'Password does not match' : 'Password matched'}</p>}
               
-              <button className={style.button} disabled={password !== confirmPassword}>Register</button>
+              <button type="submit" className={style.button} disabled={password !== confirmPassword}>Register</button>
               <p className={style.account}>Already Registered? <span className={style.signInLink}><Link to="/login">Login</Link></span></p>
             </form>
            

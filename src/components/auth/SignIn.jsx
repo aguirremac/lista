@@ -19,12 +19,13 @@ const style = {
   noAccount: `text-xs `,
   signUpLink: `font-bold hover:text-red-500 cursor-pointer`,
   incorrect: `text-red-800 font-bold text-sm `,
+  already: `text-sm text-red-900 font-bold`,
 };
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('')
 
   const navigate = useNavigate();
 
@@ -41,9 +42,9 @@ const SignIn = () => {
 
     navigate('/dashboard')
       })
-      .catch((error) => {
-        console.log(error);
-        setError(true)
+      .catch((error) => { 
+        setError(error.message)
+        console.log(error.message);
       });
   };
 
@@ -83,6 +84,8 @@ useEffect (()=> {
           value={email}
           required
         ></input>
+
+        {error.indexOf('user-not-found') !== -1 && <p className={style.already}>Email not yet registered.</p> }
         <input
           onChange={(e) => setPassword(e.target.value)}
           className={style.password}
@@ -91,8 +94,8 @@ useEffect (()=> {
           value={password}
           required
         ></input>
-        {error && <p className={style.incorrect}>Incorrect Email or Password!</p>}
-        <button className={style.button}>Login</button>
+        {error.indexOf('wrong-password') !== -1 && <p className={style.incorrect}>Incorrect Email or Password!</p>}
+        <button type="submit" className={style.button}>Login</button>
         <p className={style.noAccount}>Don't have an account? <span  className={style.signUpLink}>
             <Link to="/register">SignUp</Link></span> </p>
       </form>
