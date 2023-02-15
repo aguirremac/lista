@@ -23,6 +23,7 @@ const Landing = () => {
               alt="logo"
             ></img>
             <h1 className={style.name}>Lista - Note Keeper</h1>
+
           </div>
           <button className={style.button}>
             <Link to="/login">Get Started </Link>
