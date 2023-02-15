@@ -1,13 +1,14 @@
 import { updateProfile } from 'firebase/auth';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../config/firebase';
+
 
 
 const style = {
     container: `relative flex flex-col  justify-center items-center h-screen mx-auto w-full bg-gradient-to-r from-yellow-200 via-pink-200 to-pink-400 font-mont`,
     form: `bg-slate-500/50 text-sm md:text-md   flex flex-col justify-center items-center w-[300px] h-[200px] md:w-[500px] md:h-[200px] rounded-xl gap-2 p-3 px-10`,
-    titleDiv: `absolute bottom-1 right-3 flex items-center justify-center  gap-2 mb-5`,
+    titleDiv: `absolute bottom-1 right-3 hidden md:flex items-center justify-center  gap-2 mb-5`,
     icon: `h-[13px] md:h-[40px]`,
     lista: `text-xl md:text-2xl text-black/60  font-mont font-bold`,
     loginText: `font-bold text-lg `,
@@ -26,14 +27,21 @@ const Name = () => {
 
     const navigate = useNavigate();
 
+
+
 const handleClick = () => {
     updateProfile(auth.currentUser, {
         displayName: name
     })
-    navigate("/dashboard")
 
-    
+    navigate("/login")    
 }
+
+useEffect (()=> {
+
+  JSON.parse(localStorage.getItem("user")) && navigate('/dashboard') 
+
+})
 
     
   return (

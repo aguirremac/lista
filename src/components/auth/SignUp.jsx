@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from 'react'
+import {  createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 
 
+
+
 const style = {
   container: ` relative flex flex-col  justify-center items-center h-screen mx-auto w-full bg-gradient-to-r from-yellow-200 to-yellow-500 font-mont`,
-  form: `bg-slate-300/40 text-sm md:text-md  flex flex-col justify-center items-center w-[300px] h-[400px] md:w-[500px] md:h-[400px] rounded-xl gap-2 p-3 px-10`,
-  titleDiv: `absolute bottom-1 right-3 flex items-center justify-center  gap-2 mb-5`,
+  form: `bg-slate-600/30 text-sm md:text-md  flex flex-col justify-center items-center w-[300px] h-[400px] md:w-[500px] md:h-[400px] rounded-xl gap-2 p-3 px-10`,
+  titleDiv: `absolute bottom-1 right-3 hidden md:flex items-center justify-center  gap-2 mb-5`,
   icon: `h-[25px] md:h-[40px]`,
   lista: `text-xl md:text-2xl text-black/60  font-mont font-bold`,
   signUpText: `font-bold text-lg `,
@@ -34,19 +36,24 @@ const [error, setError] = useState('');
 
 const navigate = useNavigate();
 
+
+
 const handleSubmit = (e) => {
   e.preventDefault();
   createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
     navigate('/enterName')
-    console.log(userCredential);
+    
   }).catch(err => {
     setError(err.message)
   })
 
-
 }
 
+useEffect (()=> {
 
+  JSON.parse(localStorage.getItem("user")) && navigate('/dashboard') 
+
+})
 
 
   return (
@@ -71,7 +78,7 @@ const handleSubmit = (e) => {
               {confirmPassword && <p className={password !== confirmPassword ? style.dontMatch: style.match}>{password !== confirmPassword ? 'Password does not match' : 'Password matched'}</p>}
               
               <button className={style.button} disabled={password !== confirmPassword}>Register</button>
-              <p className={style.account}>Already Registered? <span className={style.signInLink}><Link to="/signin">Login</Link></span></p>
+              <p className={style.account}>Already Registered? <span className={style.signInLink}><Link to="/login">Login</Link></span></p>
             </form>
            
       

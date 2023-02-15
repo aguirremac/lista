@@ -1,21 +1,25 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { IoMdLogOut } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { BsPlusSquareDotted } from "react-icons/bs";
+import { AuthContext } from "../context/AuthContext";
 
 
 
 
 
-const Header = ({handleClick, user}) => {
+const Header = ({handleClick}) => {
 
     const navigate = useNavigate();
 
+    const {loggedUser} = useContext(AuthContext);
+
     const handleLogOut = ()=> {
 signOut (auth).then(() => {
-    navigate("/signin") 
+    localStorage.clear()
+    navigate("/login") 
 
 }).catch((error) => {
     console.log(error.message)
@@ -33,7 +37,7 @@ return (
     <div onClick={handleClick} className='flex  items-center md:gap-5 text-2xl md:text-2xl text-white font-mont font-bold hover:scale-105 cursor-pointer'><BsPlusSquareDotted /> <p className="hidden md:block ">Add Note</p></div>
     
     <div className="flex flex-col justify-center items-end">
-        <p className="text-yellow-200 text-[10px] md:text-lg">{user.displayName}</p>
+        <p className="text-yellow-200 text-[10px] md:text-lg">{loggedUser.displayName || loggedUser.appName }</p>
     <div onClick={handleLogOut} className="text-[9px] md:text-sm flex items-center justify-center gap-1 cursor-pointer hover:scale-105 hover:text-red-600 ">
     <p>Log out</p>
     <IoMdLogOut />

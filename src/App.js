@@ -2,7 +2,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Note from './components/Note';
 import Input from './components/Input';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Landing from './components/Landing';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ import SignUp from './components/auth/SignUp';
 import {  Route, Link, Routes, Navigate} from 'react-router-dom';
 import AuthListen from './components/auth/AuthListen';
 import Name from './components/auth/Name';
+import { AuthContext } from './context/AuthContext';
 
 
 
@@ -21,7 +22,7 @@ const App = () => {
   const [addNote, setAddNote] = useState(false);
   const [seeMore, setSeeMore] = useState([]);
   const [isSeeMore, setIsSeeMore] = useState(false);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
 
   const handleAdd = (input) => {
@@ -70,19 +71,21 @@ const App = () => {
     setIsSeeMore(x);
   };
 
-  const handleCurrentUser = (currentUser) => {
-    setUser(currentUser)
+  // const handleCurrentUser = (currentUser) => {
+  //   setUser(currentUser)
     
-  }
+  // }
   // console.log(user.displayName)
 
   //adding RequireAuth to not access everything
 
-  // const loggedUser = true;
-  // const RequireAuth = ({children}) => {
-  //   return loggedUser ? children : <Navigate to="/signin" />
-  // }
+  const {loggedUser} = useContext(AuthContext);
 
+  const RequireAuth = ({children}) => {
+    return loggedUser ? children : <Navigate to="/login" />
+  }
+
+  console.log(loggedUser);
  
 
 
@@ -95,13 +98,13 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Landing /> } />
-        <Route path="/signin" element={<SignIn /> } />
-        <Route path="/signup" element={<SignUp /> } /> 
+        <Route path="/login" element={<SignIn /> } />
+        <Route path="/register" element={<SignUp /> } /> 
         <Route path="/enterName" element={<Name /> } /> 
         
-        <Route path='/dashboard' element={ <>
-         <Header handleClick={showInput} user={user} />
-         <AuthListen handleCurrentUser={handleCurrentUser}/>
+        <Route path='/dashboard' element={ <RequireAuth> <>
+         <Header handleClick={showInput}  />
+         <AuthListen/>
          {addNote && <Input onAdd={handleAdd} handleClick={showInput} />}
          <Note
                 notes={notes}
@@ -111,7 +114,7 @@ const App = () => {
               {isSeeMore && <Edit zoomDetails={seeMore} zoomOff={zoomOff} />}
               {/* <Footer /> */}
               <ToastContainer /> 
-         </>} />
+         </> </RequireAuth>} />
          <Route path="/input" element={<>
          
          {/* <Header handleClick={showInput} displayName={user.displayName}  /> */}
