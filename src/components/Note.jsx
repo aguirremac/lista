@@ -1,5 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState} from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { doc, deleteDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { AuthContext } from '../context/AuthContext';
+import { db } from '../config/firebase';
+import Edit from './Edit';
 
 
 const style = {
@@ -15,19 +20,68 @@ const style = {
   // seeMore: `absolute bottom-2 font-semibold text-[10px] md:text-sm text-black hover:text-red-700 hover:font-bold`,
 };
 
-const Note = (props) => {
+const Note = ({clickSeeMore}) => {
   // const [notes, setNotes]= useState ([])
   
+  const {loggedUser} = useContext(AuthContext);
+  const [seeMore, setSeeMore] = useState(false)
+  const [selectedNote, setSelectedNote] = useState("");
+  const [notes, setNotes] = useState([]);
+  
+  let notesList = [];
+  
+
+
+  useEffect(()=> {
+
+
+    const fetchData = async() => {
+    try{
+    const q = query(collection(db, "notes"), where("userId", "==", loggedUser.uid));
+    const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {    
+    notesList.push({...doc.data(), noteId: doc.id}) //id of notes to array
+    
+    
+  }); setNotes(notesList)
+
+}catch (err) {
+  console.log(err.message)
+
+
+    }
+    
+  }; fetchData()
+  
+
+  },[notes])
+
+const handleSeeMore = (index) => {
+  setSeeMore(true)
+  setSelectedNote(notes[index])
+}
+
+const handleClose = () => {
+  setSeeMore(false)
+}
+
+
+const onDelete = async (index) => {
+  console.log(doc)
+  await deleteDoc(doc(db, "notes", notes[index].noteId));
+}
+
 
   return (
     <div>
       <div className={style.noteContainer}>
-{props.notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : props.notes
-          .map((item, idNumber) => {
+{notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : notes
+          .map((item, index) => {
             return (
               <div
-                onClick={()=> {props.clickSeeMore(idNumber)}}
-                key={idNumber}
+                id={index}
+                onClick={()=> {handleSeeMore(index)}}
+                key={index}
                 className={style.note}
               >
                 <div
@@ -41,7 +95,7 @@ const Note = (props) => {
                   
                     onClick={(e) => { 
                       e.stopPropagation();
-                      props.onDelete(idNumber);
+                      onDelete(index);
                     }}
                     className={style.delete}
                   />
@@ -51,22 +105,22 @@ const Note = (props) => {
                     <p className={style.content}>{item.content}</p>
                   </div>
                   <p className={style.dateTime}>{item.dateTime}</p>
-                  {/* <p
+                   {/* <p
                     onClick={() => {
-                      props.clickSeeMore(idNumber);
+                      clickSeeMore(idNumber);
                     }}
                     className={style.seeMore}
                   >
                     See more..
-                  </p> */}
-                </div>
+                  </p>  */}
+              </div>
               </div>
             );
-          })
-          .reverse()}
+          })}
 
         
       </div>
+      {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} />}
     </div>
   );
 };

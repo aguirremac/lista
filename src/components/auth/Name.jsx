@@ -1,7 +1,9 @@
+
 import { updateProfile } from 'firebase/auth';
-import React, { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../config/firebase';
+
 
 
 
@@ -33,8 +35,8 @@ const handleClick = () => {
     updateProfile(auth.currentUser, {
         displayName: name
     })
-
-    navigate("/login")    
+    navigate("/login")
+    
 }
 
 useEffect (()=> {
