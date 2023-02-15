@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ColorPicker from './ColorPicker';
-
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
 import { IoMdClose } from 'react-icons/io';
+import { AuthContext } from '../context/AuthContext';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const Input = (props) => {
   const [input, setInput] = useState({
@@ -37,8 +41,27 @@ const Input = (props) => {
     });
   };
 
-  const onSubmit = () => {
-    props.onAdd(input);
+  // toastify
+
+  const notify = () => {
+    toast.success('Note Added!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
+
+  const { loggedUser } = useContext(AuthContext);
+
+  const onSubmit = async () => {
+    notify();
+    await addDoc(collection(db, 'notes'), { ...input, userId: loggedUser.uid });
+
     setInput({
       title: '',
       content: '',
@@ -50,7 +73,6 @@ const Input = (props) => {
   return (
     <div>
       <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute ">
-        
         {/* backdrop */}
         <div className="w-full h-screen bg-black/80  overflow-auto "></div>
 
