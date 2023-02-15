@@ -5,7 +5,7 @@ import { auth } from '../../config/firebase';
 
 
 
-const AuthListen = ({handleCurrentUser}) => {
+const AuthListen = () => {
     
     const [currentUser, setCurrentUser] = useState({});
 
@@ -14,15 +14,13 @@ const AuthListen = ({handleCurrentUser}) => {
      onAuthStateChanged(auth, (user)=> {
         if (user) {
            setCurrentUser(user)
-           console.log(currentUser)
-           handleCurrentUser(currentUser)
         }else {
             //user is signed out
         }
             
     });
 
-    },[currentUser])
+    },[currentUser]) //this will only run if currenUser changed
 
     
 
