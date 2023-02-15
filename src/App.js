@@ -17,6 +17,7 @@ import { AuthContext } from './context/AuthContext';
 
 
 
+
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
