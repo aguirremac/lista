@@ -15,7 +15,7 @@ const style = {
   delete: `absolute top-3 right-3 text-[15px] md:text-[20px] text-gray-600 cursor-pointer hover:text-red-700 hover:scale-125`,
   title: `font-bold  text-xs md:text-xl pb-2 truncate max-w-[130px] md:max-w-[240px]`,
   contentContainer: `md:h-[170px] h-[110px] truncate`,
-  content: `h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed`,
+  content: `h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed prose`,
   dateTime: ` text-[8px] text-gray-600 md:text-[12px] pt-3 md:pt-2 text-right`,
   // seeMore: `absolute bottom-2 font-semibold text-[10px] md:text-sm text-black hover:text-red-700 hover:font-bold`,
 };

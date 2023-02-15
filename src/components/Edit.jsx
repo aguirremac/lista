@@ -11,7 +11,7 @@ const Edit = ({selectedNote, handleClose}) => {
     <div className="mx-auto w-full h-screen  flex justify-center items-center relative bg-black/80 overflow-auto cursor-pointer">
       <div
         style={{ backgroundColor: selectedNote.noteColor }}
-        className=" w-[300px]  min-h-[250px] md:min-w-[500px] xl:min-w-[700px] md:min-h-[500px] rounded-xl absolute top-20 font-mont px-5 py-4"
+        className=" w-[300px]  min-h-[250px] md:min-w-[500px] xl:min-w-[700px] md:min-h-[500px] rounded-xl absolute top-10 font-mont px-5 py-4"
       >
         {/* <FiEdit onClick={()=>setEditable(true)} className="absolute top-3 right-10 hover:text-red hover:scale-125 text-md md:text-lg cursor-pointer" /> */}
 
@@ -23,7 +23,7 @@ const Edit = ({selectedNote, handleClose}) => {
         <h2  onClick={()=>setEditable(true)} className="font-bold text-xl cursor-text outline-none break-all ">{selectedNote.title}</h2>
 
         <div>
-          <p  onClick={()=>setEditable(true)} className="pt-3 min-h-[450px] cursor-text outline-none">{selectedNote.content}</p>
+          <p  onClick={()=>setEditable(true)} className="pt-3 min-h-[450px] cursor-text outline-none whitespace-pre-wrap">{selectedNote.content}</p>
         </div>
         </div>
         <p
