@@ -100,7 +100,7 @@ const Input = (props) => {
             value={input.content}
             type="text"
             placeholder="Take a note.."
-            className="w-full h-[175px] md:h-[300px] bg-transparent outline-none whitespace-pre-wrap placeholder-black/50 text-[12px] md:text-lg"
+            className="w-full h-[175px] md:h-[600px] bg-transparent outline-none whitespace-pre-wrap placeholder-black/50 text-[12px] md:text-lg"
           />
           <ColorPicker
             onClick={handleChange}
