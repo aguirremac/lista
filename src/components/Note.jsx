@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useRef, useState} from 'react';
+import React, { useContext, useEffect, useMemo, useState} from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { doc, deleteDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../config/firebase';
 import Edit from './Edit';
+import Header from './Header';
+import Input from './Input';
 
 
 const style = {
@@ -20,30 +22,32 @@ const style = {
   // seeMore: `absolute bottom-2 font-semibold text-[10px] md:text-sm text-black hover:text-red-700 hover:font-bold`,
 };
 
-const Note = ({clickSeeMore}) => {
+const Note = () => {
   // const [notes, setNotes]= useState ([])
   
   const {loggedUser} = useContext(AuthContext);
   const [seeMore, setSeeMore] = useState(false)
   const [selectedNote, setSelectedNote] = useState("");
   const [notes, setNotes] = useState([]);
+ 
   
   let notesList = [];
   
-
+const notesQuery = useMemo(()=> 
+  query(collection(db, "notes"), where("userId", "==", loggedUser.uid)),[loggedUser.uid]
+)
 
   useEffect(()=> {
 
-
     const fetchData = async() => {
     try{
-    const q = query(collection(db, "notes"), where("userId", "==", loggedUser.uid));
-    const querySnapshot = await getDocs(q);
+    
+    const querySnapshot = await getDocs(notesQuery);
   querySnapshot.forEach((doc) => {    
     notesList.push({...doc.data(), noteId: doc.id}) //id of notes to array
-    
-    
-  }); setNotes(notesList)
+     
+  }); 
+     setNotes(notesList)
 
 }catch (err) {
   console.log(err.message)
@@ -54,7 +58,7 @@ const Note = ({clickSeeMore}) => {
   }; fetchData()
   
 
-  },[notes])
+  },[notesList])
 
 const handleSeeMore = (index) => {
   setSeeMore(true)
@@ -121,6 +125,8 @@ const onDelete = async (index) => {
         
       </div>
       {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} />}
+      
+      
     </div>
   );
 };

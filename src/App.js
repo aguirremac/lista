@@ -1,16 +1,13 @@
-
 import Header from './components/Header';
 import Note from './components/Note';
 import Input from './components/Input';
 import { useContext, useState } from 'react';
 import Landing from './components/Landing';
-import { ToastContainer, toast } from 'react-toastify';
-
-import Edit from './components/Edit';
+import { ToastContainer } from 'react-toastify';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
-import {  Route, Link, Routes, Navigate} from 'react-router-dom';
-import AuthListen from './components/auth/AuthListen';
+import {  Route, Routes, Navigate} from 'react-router-dom';
+// import AuthListen from './components/auth/AuthListen';
 import Name from './components/auth/Name';
 import { AuthContext } from './context/AuthContext';
 
@@ -18,51 +15,17 @@ import { AuthContext } from './context/AuthContext';
 
 
 
+
 const App = () => {
-  const [notes, setNotes] = useState([]);
-  const [addNote, setAddNote] = useState(false);
-  // const [seeMore, setSeeMore] = useState([]);
   
-  // const [user, setUser] = useState({});
-
-
-  // const handleAdd = (input) => {
-  //   setNotes((prevNotes) => {
-  //     return [...prevNotes, input];
-  //   });
-  //   notify();
-  // };
-
-  // const handleDelete = (idNumber) => {
-  //   setNotes((prevNotes) => {
-  //     return prevNotes.filter((item, index) => {
-  //       return index !== idNumber;
-  //     });
-  //   });
-  // };
+  const [addNote, setAddNote] = useState(false);
+  
 
   const showInput = () => {
     setAddNote(!addNote);
   };
 
  
-
-
-  // const clickSeeMore = (idNumber) => {
-  //   setSeeMore(notes[idNumber]);
-  //   setIsSeeMore(true);
-    
-  // };
-
-  // const zoomOff = (x) => {
-  //   setIsSeeMore(x);
-  // };
-
-  // const handleCurrentUser = (currentUser) => {
-  //   setUser(currentUser)
-    
-  // }
-  // console.log(user.displayName)
 
   //adding RequireAuth to not access everything
 
@@ -90,26 +53,16 @@ const App = () => {
         <Route path="/enterName" element={<Name /> } /> 
         
         <Route path='/dashboard' element={ <RequireAuth> <>
+        
          <Header handleClick={showInput}  />
-         <AuthListen />
-         
+         {/* <AuthListen /> */}
          <Note />
          {addNote && <Input  handleClick={showInput} />}
               
               <ToastContainer /> 
          </> </RequireAuth>} />
-         <Route path="/input" element={<>
-         
-         {/* <Header handleClick={showInput} displayName={user.displayName}  /> */}
-         
-         
-         
-          </>} />
-             
-             
+        
 
-      
-         
           
       </Routes>
             
