@@ -7,7 +7,7 @@ import { AuthContext } from '../context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
-const Input = (props) => {
+const Input = ({handleClick}) => {
   const [input, setInput] = useState({
     title: '',
     content: '',
@@ -82,7 +82,7 @@ const Input = (props) => {
         >
           <IoMdClose
             size={25}
-            onClick={props.handleClick}
+            onClick={handleClick}
             className="absolute right-3 cursor-pointer hover:text-red-600"
           />
           <input
