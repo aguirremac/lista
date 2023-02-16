@@ -16,6 +16,8 @@ const Input = ({handleClick}) => {
   });
   const [bgColor, setBgColor] = useState('#fffd8d');
 
+ 
+
   const handleChange = (e) => {
     e.preventDefault();
     const { value, name } = e.target;
@@ -72,6 +74,7 @@ const Input = ({handleClick}) => {
 
   return (
     <div>
+      
       <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute ">
         {/* backdrop */}
         <div className="w-full h-screen bg-black/80  overflow-auto "></div>

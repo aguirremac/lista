@@ -45,9 +45,9 @@ const notesQuery = useMemo(()=>
     const querySnapshot = await getDocs(notesQuery);
   querySnapshot.forEach((doc) => {    
     notesList.push({...doc.data(), noteId: doc.id}) //id of notes to array
-    
-    
-  }); setNotes(notesList)
+     
+  }); 
+     setNotes(notesList)
 
 }catch (err) {
   console.log(err.message)
