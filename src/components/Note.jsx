@@ -59,13 +59,15 @@ const notesQuery = useMemo(()=>
   }); 
      setNotes(notesList)
     setRefreshNotes(false)
-
-
 }catch (err) {
   console.log(err.message)
     }   
   }; fetchData()
   },[notesQuery, refreshNotes, refresh])
+
+const sortedNotes = notes.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+
+
 
 const handleSeeMore = (index) => {
   setSeeMore(true)
