@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CgCloseR } from 'react-icons/cg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 
@@ -29,7 +29,7 @@ const Contact = () => {
   const [error, setError] = useState('');
   const [message, setMessage] = useState({name:'', email:'', content:''});
 
-
+  const navigate = useNavigate();
 
 
 
@@ -37,8 +37,11 @@ const Contact = () => {
     e.preventDefault();
   setMessage((prev)=>{
    return {...prev, name: name, email:email, content: content }
-  })
-
+  });
+  navigate('/dashboard')
+  setName('')
+  setEmail('')
+  setContent('')
   }
 
 

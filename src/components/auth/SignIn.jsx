@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai';
 
 
 
@@ -15,6 +16,7 @@ const style = {
   loginText: `font-bold text-sm md:text-lg `,
   email: ` w-full rounded-md p-2 md:p-3 outline-none  `,
   password: ` w-full rounded-md  p-2 md:p-3 outline-none`,
+  passCont: `flex  w-full items-center bg-white rounded-md pr-2`,
   button: `p-2 mt-2 w-full text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-bold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 `,
   noAccount: `text-xs `,
   signUpLink: `font-bold hover:text-red-500 cursor-pointer`,
@@ -25,6 +27,7 @@ const style = {
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('')
 
   const navigate = useNavigate();
@@ -82,14 +85,14 @@ useEffect (()=> {
         ></input>
 
         {error.indexOf('user-not-found') !== -1 && <p className={style.already}>Email not yet registered.</p> }
-        <input
+        <div className={style.passCont}><input
           onChange={(e) => setPassword(e.target.value)}
           className={style.password}
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           placeholder="Password"
           value={password}
           required
-        ></input>
+        ></input> <span onClick={()=> setShowPassword(!showPassword)} className='text-gray-600  text-sm md:text-xl cursor-pointer'>{showPassword? <AiFillEyeInvisible /> : <AiFillEye />}</span></div>
         {error.indexOf('wrong-password') !== -1 && <p className={style.incorrect}>Incorrect Email or Password!</p>}
         <button disabled={password ==='' && true} type="submit" className={style.button }>Login</button>
         <p className={style.noAccount}>Don't have an account? <span  className={style.signUpLink}>
