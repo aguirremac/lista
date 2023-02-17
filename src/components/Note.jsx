@@ -16,31 +16,22 @@ const style = {
   delete: `absolute top-3 right-3 text-[15px] md:text-[20px] text-gray-600 cursor-pointer hover:text-red-700 hover:scale-125`,
   title: `font-bold  text-xs md:text-xl pb-2 truncate max-w-[130px] md:max-w-[240px]`,
   contentContainer: `md:h-[170px] h-[110px] truncate`,
-
   content: `h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed break-all`,
-
   dateTime: ` text-[8px] text-gray-600 md:text-[12px] pt-3 md:pt-2 text-right`,
-  // seeMore: `absolute bottom-2 font-semibold text-[10px] md:text-sm text-black hover:text-red-700 hover:font-bold`,
+
 };
 
 
 
-
-
 const Note = ({refresh}) => {
-  // const [notes, setNotes]= useState ([])
   
   const {loggedUser} = useContext(AuthContext);
   const [seeMore, setSeeMore] = useState(false)
   const [selectedNote, setSelectedNote] = useState("");
   const [notes, setNotes] = useState([]);
-  // const [offlineNotes, setOfflineNotes] = useState(notes);
   const [refreshNotes, setRefreshNotes] = useState(false)
-  const [addNote, setAddNote] = useState(false)
 
  
- 
-  
   let notesList = [];
   
 const notesQuery = useMemo(()=> 
@@ -59,13 +50,15 @@ const notesQuery = useMemo(()=>
   }); 
      setNotes(notesList)
     setRefreshNotes(false)
-
-
 }catch (err) {
   console.log(err.message)
     }   
   }; fetchData()
   },[notesQuery, refreshNotes, refresh])
+
+notes.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)); //sorting map
+
+
 
 const handleSeeMore = (index) => {
   setSeeMore(true)
@@ -82,17 +75,12 @@ const onDelete = async (index) => {
   //deleting from database
   await deleteDoc(doc(db, "notes", notes[index].noteId));
   setRefreshNotes(true)
-  //deleting from local
-  // setOfflineNotes(offlineNotes.filter((item) => item.noteId !== offlineNotes[index].noteId ))
 }
 
 const handleSave = () => {
   setRefreshNotes(true)
     }
 
-// addNotes  = () => {
-//   setRefreshNotes(true)
-// }
 
 
   return (
@@ -129,26 +117,16 @@ const handleSave = () => {
                     <p className={style.content}>{item.content}</p>
                   </div>
                   <p className={style.dateTime}>{item.dateTime}</p>
-                   {/* <p
-                    onClick={() => {
-                      clickSeeMore(idNumber);
-                    }}
-                    className={style.seeMore}
-                  >
-                    See more..
-                  </p>  */}
+                  
               </div>
               </div>
             );
           })}
-
-        
+ 
       </div>
 
       {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} saveNote={handleSave} />}
      
-      
-      
     </div>
   );
 };
