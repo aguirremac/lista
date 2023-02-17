@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useMemo, useState} from 'react';
+import React, {  useContext, useEffect, useMemo, useState} from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { doc, deleteDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../config/firebase';
 import Edit from './Edit';
-import Header from './Header';
-import Input from './Input';
+
 
 
 const style = {
@@ -17,18 +16,29 @@ const style = {
   delete: `absolute top-3 right-3 text-[15px] md:text-[20px] text-gray-600 cursor-pointer hover:text-red-700 hover:scale-125`,
   title: `font-bold  text-xs md:text-xl pb-2 truncate max-w-[130px] md:max-w-[240px]`,
   contentContainer: `md:h-[170px] h-[110px] truncate`,
-  content: `h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed`,
+
+  content: `h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed break-all`,
+
   dateTime: ` text-[8px] text-gray-600 md:text-[12px] pt-3 md:pt-2 text-right`,
   // seeMore: `absolute bottom-2 font-semibold text-[10px] md:text-sm text-black hover:text-red-700 hover:font-bold`,
 };
 
-const Note = () => {
+
+
+
+
+const Note = ({refresh}) => {
   // const [notes, setNotes]= useState ([])
   
   const {loggedUser} = useContext(AuthContext);
   const [seeMore, setSeeMore] = useState(false)
   const [selectedNote, setSelectedNote] = useState("");
   const [notes, setNotes] = useState([]);
+  // const [offlineNotes, setOfflineNotes] = useState(notes);
+  const [refreshNotes, setRefreshNotes] = useState(false)
+  const [addNote, setAddNote] = useState(false)
+
+ 
  
   
   let notesList = [];
@@ -48,17 +58,14 @@ const notesQuery = useMemo(()=>
      
   }); 
      setNotes(notesList)
+    setRefreshNotes(false)
+
 
 }catch (err) {
   console.log(err.message)
-
-
-    }
-    
+    }   
   }; fetchData()
-  
-
-  },[notesList])
+  },[notesQuery, refreshNotes, refresh])
 
 const handleSeeMore = (index) => {
   setSeeMore(true)
@@ -70,16 +77,28 @@ const handleClose = () => {
 }
 
 
+
 const onDelete = async (index) => {
-  console.log(doc)
+  //deleting from database
   await deleteDoc(doc(db, "notes", notes[index].noteId));
+  setRefreshNotes(true)
+  //deleting from local
+  // setOfflineNotes(offlineNotes.filter((item) => item.noteId !== offlineNotes[index].noteId ))
 }
+
+const handleSave = () => {
+  setRefreshNotes(true)
+    }
+
+// addNotes  = () => {
+//   setRefreshNotes(true)
+// }
 
 
   return (
     <div>
       <div className={style.noteContainer}>
-{notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : notes
+      {notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : notes
           .map((item, index) => {
             return (
               <div
@@ -100,6 +119,7 @@ const onDelete = async (index) => {
                     onClick={(e) => { 
                       e.stopPropagation();
                       onDelete(index);
+        
                     }}
                     className={style.delete}
                   />
@@ -124,7 +144,9 @@ const onDelete = async (index) => {
 
         
       </div>
-      {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} />}
+
+      {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} saveNote={handleSave} />}
+     
       
       
     </div>

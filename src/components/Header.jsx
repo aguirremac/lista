@@ -5,13 +5,25 @@ import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import { AuthContext } from "../context/AuthContext";
+import Input from "./Input";
+import Note from "./Note";
 
 
 
 
 
 
-const Header = ({handleClick}) => {
+const Header = () => {
+
+     const [addNote, setAddNote] = useState(false);
+     const [refresh, setRefresh] = useState(false)
+    
+    
+  
+
+  const handleAddNoteClick = () => {
+    setAddNote(!addNote);
+  };
 
 
     const navigate = useNavigate();
@@ -22,13 +34,31 @@ const Header = ({handleClick}) => {
 signOut (auth).then(() => {
     localStorage.clear()
     navigate("/login") 
-
 }).catch((error) => {
     console.log(error.message)
 })
 }
 
+
+// const handleNewNote = (input) => setRefreshNotes(Input);
+
+
+//     const user = userCredential.user;
+//     dispatch({type: "LOGIN", payload: user})
+
+//     navigate('/dashboard')
+//       })
+//       .catch((error) => { 
+//         setError(error.message)
+//         console.log(error.message);
+//       });
+//   };
+
+
+
+
 return (
+    <div>
  <header className="bg-[#51bcb3] text-white mx-auto p-4 font-semibold font-mont flex justify-between md:px-10">
     <Link to="/dashboard"><div className="flex items-center cursor-pointer ">
     <img src="https://img.icons8.com/fluency/512/sticky-notes.png" className="h-[40px] md:h-[60px]" alt="Lista Logo"></img>
@@ -36,7 +66,7 @@ return (
     <p className="text-[8px] md:text-[14px] leading-none">Note Keeper</p>
     </div>
     </div> </Link>
-    <div onClick={handleClick} className='flex  items-center md:gap-5 text-2xl md:text-2xl text-white font-mont font-bold hover:scale-105 cursor-pointer'><BsPlusSquareDotted /> <p className="hidden md:block ">Add Note</p></div>
+    <button onClick={handleAddNoteClick} disabled={addNote} style={{opacity: addNote && 0.2}} className='flex  items-center md:gap-5 text-2xl md:text-4xl text-white font-mont font-bold hover:scale-105 cursor-pointer'><BsPlusSquareDotted /> <p className="hidden md:block "></p></button>
     
     <div className="flex flex-col justify-center items-end">
 
@@ -48,6 +78,11 @@ return (
     </div>
     </div>
     </header>
+     {addNote && <Input onAddNoteClick={handleAddNoteClick} newNote={(input)=>setRefresh(input)} />}
+     <Note refresh={refresh} />
+     
+         
+    </div>
 )
 
 }

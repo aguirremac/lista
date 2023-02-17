@@ -1,7 +1,6 @@
 import Header from './components/Header';
 import Note from './components/Note';
-import Input from './components/Input';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Landing from './components/Landing';
 import { ToastContainer } from 'react-toastify';
 import SignIn from './components/auth/SignIn';
@@ -18,12 +17,7 @@ import { AuthContext } from './context/AuthContext';
 
 const App = () => {
   
-  const [addNote, setAddNote] = useState(false);
-  
-
-  const showInput = () => {
-    setAddNote(!addNote);
-  };
+ 
 
  
 
@@ -54,10 +48,9 @@ const App = () => {
         
         <Route path='/dashboard' element={ <RequireAuth> <>
         
-         <Header handleClick={showInput}  />
+         <Header  />
          {/* <AuthListen /> */}
-         <Note />
-         {addNote && <Input  handleClick={showInput} />}
+         
               
               <ToastContainer /> 
          </> </RequireAuth>} />
