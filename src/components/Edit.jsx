@@ -5,13 +5,14 @@ import {FaCheck} from 'react-icons/fa'
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from '../config/firebase';
 
-const Edit = ({selectedNote, handleClose}) => {
+const Edit = ({selectedNote, handleClose,saveNote}) => {
   const [editable, setEditable] = useState(false);
   const [newInput, setNewInput] = useState({
     title: selectedNote.title,
     content: selectedNote.content,
     noteColor: selectedNote.noteColor,
     dateTime: selectedNote.dateTime,
+    noteId: selectedNote.noteId,
   })
  
 const handleChange = (e) => {
@@ -34,6 +35,7 @@ const handleSave = async () => {
 }catch(err){
   console.log(err)
 }; setEditable(!editable)
+    saveNote(newInput)
 } 
 
 

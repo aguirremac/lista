@@ -16,6 +16,9 @@ import Note from "./Note";
 const Header = () => {
 
      const [addNote, setAddNote] = useState(false);
+     const [refresh, setRefresh] = useState(false)
+    
+    
   
 
   const handleAddNoteClick = () => {
@@ -31,6 +34,13 @@ const Header = () => {
 signOut (auth).then(() => {
     localStorage.clear()
     navigate("/login") 
+}).catch((error) => {
+    console.log(error.message)
+})
+}
+
+
+// const handleNewNote = (input) => setRefreshNotes(Input);
 
 
 //     const user = userCredential.user;
@@ -46,11 +56,6 @@ signOut (auth).then(() => {
 
 
 
-
-}).catch((error) => {
-    console.log(error.message)
-})
-}
 
 return (
     <div>
@@ -73,8 +78,9 @@ return (
     </div>
     </div>
     </header>
-     {addNote && <Input onAddNoteClick={handleAddNoteClick}  />}
-     <Note  />
+     {addNote && <Input onAddNoteClick={handleAddNoteClick} newNote={(input)=>setRefresh(input)} />}
+     <Note refresh={refresh} />
+     
          
     </div>
 )

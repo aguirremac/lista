@@ -25,14 +25,15 @@ const style = {
 
 
 
-const Note = () => {
+const Note = ({refresh}) => {
   // const [notes, setNotes]= useState ([])
   
   const {loggedUser} = useContext(AuthContext);
   const [seeMore, setSeeMore] = useState(false)
   const [selectedNote, setSelectedNote] = useState("");
   const [notes, setNotes] = useState([]);
-  const [deleteNote, setDelete] = useState(false)
+  // const [offlineNotes, setOfflineNotes] = useState(notes);
+  const [refreshNotes, setRefreshNotes] = useState(false)
   const [addNote, setAddNote] = useState(false)
 
  
@@ -55,18 +56,14 @@ const notesQuery = useMemo(()=>
      
   }); 
      setNotes(notesList)
-     setDelete(false)
+    setRefreshNotes(false)
+
 
 }catch (err) {
   console.log(err.message)
-
-
-    }
-    
+    }   
   }; fetchData()
-  
-
-  },[notesQuery, deleteNote])
+  },[notesQuery, refreshNotes, refresh])
 
 const handleSeeMore = (index) => {
   setSeeMore(true)
@@ -80,16 +77,21 @@ const handleClose = () => {
 
 
 const onDelete = async (index) => {
+  //deleting from database
   await deleteDoc(doc(db, "notes", notes[index].noteId));
-  setDelete(true)
-  
+  setRefreshNotes(true)
+  //deleting from local
+  // setOfflineNotes(offlineNotes.filter((item) => item.noteId !== offlineNotes[index].noteId ))
 }
 
-// const handleSubmitNote = () => {
-//     setAddNote(true)
+const handleSave = () => {
+  setRefreshNotes(true)
+    }
+
+// addNotes  = () => {
+//   setRefreshNotes(true)
 // }
 
-// console.log(notes);
 
   return (
     <div>
@@ -141,7 +143,7 @@ const onDelete = async (index) => {
         
       </div>
 
-      {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} />}
+      {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} saveNote={handleSave} />}
      
       
       

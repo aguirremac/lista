@@ -7,7 +7,7 @@ import { AuthContext } from '../context/AuthContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
-const Input = ({onAddNoteClick, onClick}) => {
+const Input = ({onAddNoteClick, newNote}) => {
   const [input, setInput] = useState({
     title: '',
     content: '',
@@ -62,6 +62,7 @@ const Input = ({onAddNoteClick, onClick}) => {
 
   const onSubmit = async () => {
     notify();
+    newNote(input)
     await addDoc(collection(db, 'notes'), { ...input, userId: loggedUser.uid });
 
     setInput({
@@ -71,6 +72,9 @@ const Input = ({onAddNoteClick, onClick}) => {
       dateTime: '',
     });
   };
+
+
+
 
   return (
     <div>
