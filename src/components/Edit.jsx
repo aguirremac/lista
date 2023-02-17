@@ -54,10 +54,10 @@ const handleSave = async () => {
           className="absolute top-3 right-3 hover:text-red hover:scale-125 text-lg md:text-xl cursor-pointer"
         />
         <div  onClick={()=>setEditable(true)} >
-        <input  type='text' name='title' onChange={handleChange}  value={newInput.title} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md px-2 mb-1 mt-4 font-bold w-full text-xl cursor-text outline-none break-all bg-transparent "></input>
+        <input  type='text' name='title' onChange={handleChange}  value={newInput.title} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md px-2 mb-1 mt-4 font-bold w-full text-xl cursor-text outline-none break-all bg-transparent " ></input>
 
         <div>
-          <textarea type='text' name='content' onChange={handleChange} value={newInput.content} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md p-2 mb-5 min-h-[450px] w-full cursor-text outline-none   bg-transparent "></textarea>
+          <textarea type='text' name='content' onChange={handleChange} value={newInput.content} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md p-2 mb-5 min-h-[450px] w-full cursor-text outline-none bg-transparent  break-all overflow-auto scrollbar-none " ></textarea>
         </div>
         </div>
         <p
