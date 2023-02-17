@@ -7,6 +7,7 @@ import SignUp from './components/auth/SignUp';
 import {  Route, Routes, Navigate} from 'react-router-dom';
 import Name from './components/auth/Name';
 import { AuthContext } from './context/AuthContext';
+import Contact from './components/Contact';
 
 
 const App = () => {
@@ -29,11 +30,14 @@ const App = () => {
         <Route path="/" element={<Landing /> } />
         <Route path="/login" element={<SignIn /> } />
         <Route path="/register" element={<SignUp /> } /> 
-        <Route path="/enterName" element={<Name /> } />   
+        <Route path="/enterName" element={<Name /> } />
+        <Route path="/contact" element={<Contact />  } />   
         <Route path='/dashboard' element={ <RequireAuth> <> 
          <Header  />
-            <ToastContainer /> 
-         </> </RequireAuth>} />   
+         
+        <ToastContainer /> 
+         </> </RequireAuth>} />
+          
       </Routes>
             
     </div>
