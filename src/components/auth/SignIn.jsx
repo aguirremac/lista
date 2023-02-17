@@ -49,10 +49,6 @@ const SignIn = () => {
   };
 
 
-//   const INITIAL_STATE =   {
-//     loggedUser: JSON.parse(localStorage.getItem("user")) || null,
-
-// };
 
 useEffect (()=> {
 

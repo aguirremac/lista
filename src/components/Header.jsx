@@ -10,17 +10,12 @@ import Note from "./Note";
 
 
 
-
-
-
 const Header = () => {
 
      const [addNote, setAddNote] = useState(false);
      const [refresh, setRefresh] = useState(false)
     
     
-  
-
   const handleAddNoteClick = () => {
     setAddNote(!addNote);
   };
@@ -38,22 +33,6 @@ signOut (auth).then(() => {
     console.log(error.message)
 })
 }
-
-
-// const handleNewNote = (input) => setRefreshNotes(Input);
-
-
-//     const user = userCredential.user;
-//     dispatch({type: "LOGIN", payload: user})
-
-//     navigate('/dashboard')
-//       })
-//       .catch((error) => { 
-//         setError(error.message)
-//         console.log(error.message);
-//       });
-//   };
-
 
 
 

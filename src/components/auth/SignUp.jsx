@@ -5,10 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 
-
-
-
-
 const style = {
   container: ` relative flex flex-col  justify-center items-center h-screen mx-auto w-full bg-gradient-to-r from-yellow-200 to-yellow-500 font-mont`,
   form: `bg-slate-600/30 text-sm md:text-md  flex flex-col justify-center items-center w-[300px] h-[400px] md:w-[500px] md:h-[400px] rounded-xl gap-2 p-3 px-10`,
