@@ -1,7 +1,6 @@
 import Header from './components/Header';
 import Note from './components/Note';
-import Input from './components/Input';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Landing from './components/Landing';
 import { ToastContainer } from 'react-toastify';
 import SignIn from './components/auth/SignIn';
@@ -49,9 +48,8 @@ const App = () => {
         
         <Route path='/dashboard' element={ <RequireAuth> <>
         
-         <Header />
+         <Header  />
          {/* <AuthListen /> */}
-         <Note />
          
               
               <ToastContainer /> 

@@ -1,11 +1,41 @@
 import React, { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import {FiEdit2} from 'react-icons/fi'
-import {BsCheck2} from 'react-icons/bs'
+import {FaCheck} from 'react-icons/fa'
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from '../config/firebase';
 
 const Edit = ({selectedNote, handleClose}) => {
   const [editable, setEditable] = useState(false);
+  const [newInput, setNewInput] = useState({
+    title: selectedNote.title,
+    content: selectedNote.content,
+    noteColor: selectedNote.noteColor,
+    dateTime: selectedNote.dateTime,
+  })
  
+const handleChange = (e) => {
+  const {name, value} = e.target
+  const newDateTime = new Date().toLocaleString();
+
+  setNewInput ((prevValue) => {
+    return {...prevValue, [name]: value, dateTime: newDateTime,
+    }
+  })
+}; 
+
+
+
+const handleSave = async () => {
+ try{
+  await updateDoc(doc(db, "notes", selectedNote.noteId), 
+    newInput );
+    
+}catch(err){
+  console.log(err)
+}; setEditable(!editable)
+} 
+
 
 
   return (
@@ -16,23 +46,23 @@ const Edit = ({selectedNote, handleClose}) => {
       >
         
       {!editable ? <FiEdit2 onClick={()=>setEditable(!editable)} className="absolute top-3 right-10 hover:text-red hover:scale-125 text-md md:text-lg cursor-pointer" />
-        : <BsCheck2 onClick={()=>setEditable(!editable)} className="absolute top-3 text-green-900 right-10 hover:text-red hover:scale-125 text-lg md:text-xl cursor-pointer"/>}
+        : <FaCheck onClick={handleSave} className="absolute top-3 text-green-900 right-10 hover:text-red hover:scale-125 text-lg md:text-xl cursor-pointer"/>}
         <IoMdClose
           onClick={handleClose}
           className="absolute top-3 right-3 hover:text-red hover:scale-125 text-lg md:text-xl cursor-pointer"
         />
-        <div  onClick={()=>setEditable(true)}>
-        <h2 contentEditable={editable} style={{border : editable &&  'dashed black 2px'}} className=" rounded-xl px-2 mb-1 mt-4 font-bold text-xl cursor-text outline-none break-all ">{selectedNote.title}</h2>
+        <div  onClick={()=>setEditable(true)} >
+        <input  type='text' name='title' onChange={handleChange}  value={newInput.title} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md px-2 mb-1 mt-4 font-bold w-full text-xl cursor-text outline-none break-all bg-transparent "></input>
 
         <div>
-          <p  contentEditable={editable} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-xl p-2 mb-5 min-h-[450px] cursor-text outline-none whitespace-pre-wrap break-all ">{selectedNote.content}</p>
+          <textarea type='text' name='content' onChange={handleChange} value={newInput.content} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md p-2 mb-5 min-h-[450px] w-full cursor-text outline-none   bg-transparent "></textarea>
         </div>
         </div>
         <p
           
           className="absolute bottom-3 right-3 text-right text-sm font-semibold pt-2"
         >
-          {selectedNote.dateTime}
+          {newInput.dateTime}
         </p>
       </div>
     </div>

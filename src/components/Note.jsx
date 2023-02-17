@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState} from 'react';
+import React, {  useContext, useEffect, useMemo, useState} from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { doc, deleteDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
@@ -21,6 +21,10 @@ const style = {
   // seeMore: `absolute bottom-2 font-semibold text-[10px] md:text-sm text-black hover:text-red-700 hover:font-bold`,
 };
 
+
+
+
+
 const Note = () => {
   // const [notes, setNotes]= useState ([])
   
@@ -28,6 +32,10 @@ const Note = () => {
   const [seeMore, setSeeMore] = useState(false)
   const [selectedNote, setSelectedNote] = useState("");
   const [notes, setNotes] = useState([]);
+  const [deleteNote, setDelete] = useState(false)
+  const [addNote, setAddNote] = useState(false)
+
+ 
  
   
   let notesList = [];
@@ -47,6 +55,7 @@ const notesQuery = useMemo(()=>
      
   }); 
      setNotes(notesList)
+     setDelete(false)
 
 }catch (err) {
   console.log(err.message)
@@ -57,7 +66,7 @@ const notesQuery = useMemo(()=>
   }; fetchData()
   
 
-  },[])
+  },[notesQuery, deleteNote])
 
 const handleSeeMore = (index) => {
   setSeeMore(true)
@@ -69,16 +78,23 @@ const handleClose = () => {
 }
 
 
+
 const onDelete = async (index) => {
-  console.log(doc)
   await deleteDoc(doc(db, "notes", notes[index].noteId));
+  setDelete(true)
+  
 }
 
+// const handleSubmitNote = () => {
+//     setAddNote(true)
+// }
+
+// console.log(notes);
 
   return (
     <div>
       <div className={style.noteContainer}>
-{notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : notes
+      {notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : notes
           .map((item, index) => {
             return (
               <div
@@ -99,6 +115,7 @@ const onDelete = async (index) => {
                     onClick={(e) => { 
                       e.stopPropagation();
                       onDelete(index);
+        
                     }}
                     className={style.delete}
                   />
@@ -125,6 +142,7 @@ const onDelete = async (index) => {
       </div>
 
       {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} />}
+     
       
       
     </div>

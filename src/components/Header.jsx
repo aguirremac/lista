@@ -6,6 +6,7 @@ import { auth } from "../config/firebase";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import { AuthContext } from "../context/AuthContext";
 import Input from "./Input";
+import Note from "./Note";
 
 
 
@@ -60,7 +61,7 @@ return (
     <p className="text-[8px] md:text-[14px] leading-none">Note Keeper</p>
     </div>
     </div> </Link>
-    <button onClick={handleAddNoteClick} disabled={addNote} style={{opacity: addNote && 0.2}} className='flex  items-center md:gap-5 text-2xl md:text-2xl text-white font-mont font-bold hover:scale-105 cursor-pointer'><BsPlusSquareDotted /> <p className="hidden md:block ">Add Note</p></button>
+    <button onClick={handleAddNoteClick} disabled={addNote} style={{opacity: addNote && 0.2}} className='flex  items-center md:gap-5 text-2xl md:text-4xl text-white font-mont font-bold hover:scale-105 cursor-pointer'><BsPlusSquareDotted /> <p className="hidden md:block "></p></button>
     
     <div className="flex flex-col justify-center items-end">
 
@@ -73,6 +74,8 @@ return (
     </div>
     </header>
      {addNote && <Input onAddNoteClick={handleAddNoteClick}  />}
+     <Note  />
+         
     </div>
 )
 

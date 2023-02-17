@@ -1,13 +1,13 @@
 const AddNoteReducer = (state, action) => {
     switch (action.type) {
-        case "ADDNOTE": {
+        case "DELETE_NOTE": {
             return { 
-                loggedUser: action.payload //assingning to App.js user variable
+                updateNote: action.payload //assingning to App.js user variable
             }
         }
-        case "CLOSENOTE" : {
+        case "ADD_NOTE" : {
             return {
-                loggedUser: null,
+                updateNote: action.payload,
             }
         }
         default:
