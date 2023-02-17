@@ -18,12 +18,7 @@ import { AuthContext } from './context/AuthContext';
 
 const App = () => {
   
-  const [addNote, setAddNote] = useState(false);
-  
-
-  const showInput = () => {
-    setAddNote(!addNote);
-  };
+ 
 
  
 
@@ -54,10 +49,10 @@ const App = () => {
         
         <Route path='/dashboard' element={ <RequireAuth> <>
         
-         <Header handleClick={showInput}  />
+         <Header />
          {/* <AuthListen /> */}
          <Note />
-         {addNote && <Input  handleClick={showInput} />}
+         
               
               <ToastContainer /> 
          </> </RequireAuth>} />
