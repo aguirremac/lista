@@ -19,11 +19,12 @@ const style = {
   email: ` w-full rounded-md md:p-3 p-2 outline-none  `,
   password: ` w-full rounded-md md:p-3 p-2 outline-none`,
   button: `p-2 w-full mt-2 text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-bold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2`,
-  dontMatch: `text-xs md:text-sm text-red-900 font-bold`,
-  match: `text-xs md:text-sm text-green-700 font-bold`,
+  dontMatch: `text-[10px] md:text-sm text-red-900 font-bold`,
+  match: `text-[10px] md:text-sm text-green-700 font-bold`,
   signInLink: `font-bold hover:text-green-800 cursor-pointer`,
   account: `text-sm`,
   already: `text-sm text-red-900 font-bold`,
+  short: `font-bold md:text-xs text-[8px] text-red-900`
 
 }
 
@@ -75,9 +76,9 @@ useEffect (()=> {
               <input onChange={(e)=>setEmail(e.target.value)} className={style.email} type="email" placeholder='Email' value={email} required></input>
               {error.indexOf('email-already-in-use') !== -1 && <p className={style.already}>Email already used.</p> }
               <input onChange={(e)=>setPassword(e.target.value)} className={style.password} type="password" placeholder='Password' value={password} required></input>
+              {password.length < 6 && <p className={style.short}>Password is too short (at least 6 characters)</p> }
               <input onChange={(e)=>setConfirmPassword(e.target.value)} className={style.password} type="password" placeholder='Confirm Password' value={confirmPassword} required></input>
               {confirmPassword && <p className={password !== confirmPassword ? style.dontMatch: style.match}>{password !== confirmPassword ? 'Password does not match' : 'Password matched'}</p>}
-              
               <button type="submit" className={style.button} disabled={password !== confirmPassword}>Register</button>
               <p className={style.account}>Already Registered? <span className={style.signInLink}><Link to="/login">Login</Link></span></p>
             </form>
