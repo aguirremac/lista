@@ -41,10 +41,10 @@ const handleSave = async () => {
 
 
   return (
-    <div className="mx-auto w-full h-screen  flex justify-center items-center relative bg-black/80 overflow-auto cursor-pointer">
+    <div className="mx-auto w-full h-screen  flex justify-center items-center  bg-black/80 overflow-auto cursor-pointer fixed top-0 ">
       <div
         style={{ backgroundColor: selectedNote.noteColor }}
-        className=" w-[300px]  min-h-[250px] md:min-w-[500px] xl:min-w-[700px] md:min-h-[500px] rounded-xl absolute top-10 font-mont px-5 py-4"
+        className=" w-[300px]  min-h-[250px] md:min-w-[500px] xl:min-w-[700px] md:min-h-[500px] rounded-xl absolute top-[120px] font-mont px-5 py-4"
       >
         
       {!editable ? <FiEdit2 onClick={()=>setEditable(!editable)} className="absolute top-3 right-10 hover:text-red hover:scale-125 text-md md:text-lg cursor-pointer" />
@@ -54,10 +54,10 @@ const handleSave = async () => {
           className="absolute top-3 right-3 hover:text-red hover:scale-125 text-lg md:text-xl cursor-pointer"
         />
         <div  onClick={()=>setEditable(true)} >
-        <input  type='text' name='title' onChange={handleChange}  value={newInput.title} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md px-2 mb-1 mt-4 font-bold w-full text-xl cursor-text outline-none break-all bg-transparent " ></input>
+        <input  type='text' name='title' onChange={handleChange}  value={newInput.title} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md px-2 mb-1 mt-4 font-bold w-full text-md md:text-xl cursor-text outline-none  bg-transparent break-words" ></input>
 
         <div>
-          <textarea type='text' name='content' onChange={handleChange} value={newInput.content} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md p-2 mb-5 min-h-[450px] w-full cursor-text outline-none bg-transparent  break-auto overflow-auto scrollbar-none " ></textarea>
+          <textarea type='textarea' name='content' onChange={handleChange} value={newInput.content} style={{border : editable &&  'dashed black 2px'}}  className=" rounded-md p-2 mb-5 min-h-[450px] w-full cursor-text outline-none bg-transparent  break-auto overflow-auto scrollbar-none " ></textarea>
         </div>
         </div>
         <p

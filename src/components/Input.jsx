@@ -79,13 +79,13 @@ const Input = ({onAddNoteClick, newNote}) => {
   return (
     <div>
       
-      <div className="font-mont z-10 drop-shadow-2xl w-full h-screen absolute ">
+      <div className="font-mont drop-shadow-2xl w-full h-screen absolute top-0 z-30  ">
         {/* backdrop */}
         <div className="w-full h-screen bg-black/80  overflow-auto "></div>
 
         <div
           style={{ backgroundColor: bgColor }}
-          className="w-[300px] h-[400px] md:w-[500px] md:h-[700px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-5"
+          className="w-[300px] h-[400px] md:w-[500px] md:h-[700px] px-4 py-2  absolute flex flex-col rounded-xl right-5 top-24"
         >
           <IoMdClose
             size={25}

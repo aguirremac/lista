@@ -43,7 +43,7 @@ signOut (auth).then(() => {
 
 return (
     <div>
- <header className="bg-[#51bcb3] text-white mx-auto p-4 font-semibold font-mont flex justify-between md:px-7">
+ <header className="bg-[#51bcb3] text-white mx-auto p-4 font-semibold font-mont flex justify-between md:px-7 z-50 sticky top-0">
     <Link to="/dashboard"><div className="flex items-center cursor-pointer ">
     <img src="https://img.icons8.com/fluency/512/sticky-notes.png" className="h-[40px] md:h-[60px]" alt="Lista Logo"></img>
     <div className="flex flex-col justify-center items-start "><h1 className="tracking-widest text-md md:text-[30px] leading-none">Lista</h1>
@@ -68,7 +68,7 @@ return (
 
         <div className="flex flex-col justify-center items-start pt-7 pl-5">
         <p className="text-blue-600 text-[12px] md:text-lg">Hi, {loggedUser.displayName}!</p>
-        <div onClick={handleLogOut} className="text-[15px] md:text-lg flex items-center justify-center gap-1 cursor-pointer hover:scale-105 hover:text-red-600  absolute bottom-2 right-2 ">
+        <div onClick={handleLogOut} className="text-[15px] md:text-lg flex items-center justify-center gap-1 cursor-pointer hover:scale-105 hover:text-red-600  absolute bottom-10 md:bottom-2 right-2 ">
         <p>Log out</p>
         <IoMdLogOut  />
         </div>
