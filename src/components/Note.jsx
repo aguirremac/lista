@@ -1,15 +1,14 @@
-import React, {  useContext, useEffect, useMemo, useState} from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { doc, deleteDoc } from "firebase/firestore";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { doc, deleteDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { AuthContext } from '../context/AuthContext';
 import { db } from '../config/firebase';
 import Edit from './Edit';
 
-
-
 const style = {
-  noteContainer: `w-full flex justify-evenly  xl:justify-start gap-y-3 xl:gap-4 pt-3 md:pt-6 flex-wrap flex-start pb-2 md:px-5 xl:px-5 z-11 absolute `,
+  noteContainer: `fixed top-0 left-0 z-10 h-screen overflow-scroll scrollbar-none  `,
+  noteCont2: `w-full flex justify-evenly px-5 gap-2 xl:justify-start gap-y-3 xl:gap-4 pt-3 md:pt-6 flex-wrap  pb-2 md:px-5 xl:px-5 z-11 relative top-[70px] md:top-[80px] overflow-scroll scrollbar-none `,
   empty: `flex items-center justify-center md:text-5xl font-mont font-bold text-black/30 w-full h-screen`,
   note: `font-mont w-[170px] h-[180px] md:h-[250px] md:w-[300px]  overflow-hidden  shadow-xl rounded-xl cursor-pointer hover:scale-105 duration-200`,
   textContainer: `relative px-2 md:px-5 pt-3 h-full`,
@@ -18,115 +17,113 @@ const style = {
   contentContainer: `md:h-[170px] h-[110px] truncate`,
   content: `h-full whitespace-pre-wrap text-[10px] md:text-[15px] font-medium leading-relaxed break-all`,
   dateTime: ` text-[8px] text-gray-600 md:text-[12px] pt-3 md:pt-2 text-right`,
-
 };
 
-
-
-const Note = ({refresh}) => {
-  
-  const {loggedUser} = useContext(AuthContext);
-  const [seeMore, setSeeMore] = useState(false)
-  const [selectedNote, setSelectedNote] = useState("");
+const Note = ({ refresh }) => {
+  const { loggedUser } = useContext(AuthContext);
+  const [seeMore, setSeeMore] = useState(false);
+  const [selectedNote, setSelectedNote] = useState('');
   const [notes, setNotes] = useState([]);
-  const [refreshNotes, setRefreshNotes] = useState(false)
+  const [refreshNotes, setRefreshNotes] = useState(false);
 
- 
   let notesList = [];
-  
-const notesQuery = useMemo(()=> 
-  query(collection(db, "notes"), where("userId", "==", loggedUser.uid)),[loggedUser.uid]
-)
 
-  useEffect(()=> {
+  const notesQuery = useMemo(
+    () => query(collection(db, 'notes'), where('userId', '==', loggedUser.uid)),
+    [loggedUser.uid]
+  );
 
-    const fetchData = async() => {
-    try{
-    
-    const querySnapshot = await getDocs(notesQuery);
-  querySnapshot.forEach((doc) => {    
-    notesList.push({...doc.data(), noteId: doc.id}) //id of notes to array
-     
-  }); 
-     setNotes(notesList)
-    setRefreshNotes(false)
-}catch (err) {
-  console.log(err.message)
-    }   
-  }; fetchData()
-  },[notesQuery, refreshNotes, refresh])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(notesQuery);
+        querySnapshot.forEach((doc) => {
+          notesList.push({ ...doc.data(), noteId: doc.id }); //id of notes to array
+        });
+        setNotes(notesList);
+        setRefreshNotes(false);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+  }, [notesQuery, refreshNotes, refresh]);
 
-notes.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)); //sorting map
+  notes.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)); //sorting map
 
+  const handleSeeMore = (index) => {
+    setSeeMore(true);
+    setSelectedNote(notes[index]);
+  };
 
+  const handleClose = () => {
+    setSeeMore(false);
+  };
 
-const handleSeeMore = (index) => {
-  setSeeMore(true)
-  setSelectedNote(notes[index])
-}
+  const onDelete = async (index) => {
+    //deleting from database
+    await deleteDoc(doc(db, 'notes', notes[index].noteId));
+    setRefreshNotes(true);
+  };
 
-const handleClose = () => {
-  setSeeMore(false)
-}
-
-
-
-const onDelete = async (index) => {
-  //deleting from database
-  await deleteDoc(doc(db, "notes", notes[index].noteId));
-  setRefreshNotes(true)
-}
-
-const handleSave = () => {
-  setRefreshNotes(true)
-    }
-
-
+  const handleSave = () => {
+    setRefreshNotes(true);
+  };
 
   return (
     <div>
       <div className={style.noteContainer}>
-      {notes.length === 0 ? <div className={style.empty}><h1>No Notes Added</h1></div> : notes
-          .map((item, index) => {
-            return (
-              <div
-                id={index}
-                onClick={()=> {handleSeeMore(index)}}
-                key={index}
-                className={style.note}
-              >
+        <div className={style.noteCont2}>
+          {notes.length === 0 ? (
+            <div className={style.empty}>
+              <h1>No Notes Added</h1>
+            </div>
+          ) : (
+            notes.map((item, index) => {
+              return (
                 <div
-                  style={{
-                    backgroundColor:
-                      item.noteColor !== '' ? item.noteColor : '#fffd8d',
+                  id={index}
+                  onClick={() => {
+                    handleSeeMore(index);
                   }}
-                  className={style.textContainer}
+                  key={index}
+                  className={style.note}
                 >
-                  <RiDeleteBin6Line
-                  
-                    onClick={(e) => { 
-                      e.stopPropagation();
-                      onDelete(index);
-        
+                  <div
+                    style={{
+                      backgroundColor:
+                        item.noteColor !== '' ? item.noteColor : '#fffd8d',
                     }}
-                    className={style.delete}
-                  />
-                  <h2 className={style.title}>{item.title}</h2>
+                    className={style.textContainer}
+                  >
+                    <RiDeleteBin6Line
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDelete(index);
+                      }}
+                      className={style.delete}
+                    />
+                    <h2 className={style.title}>{item.title}</h2>
 
-                  <div className={style.contentContainer}>
-                    <p className={style.content}>{item.content}</p>
+                    <div className={style.contentContainer}>
+                      <p className={style.content}>{item.content}</p>
+                    </div>
+                    <p className={style.dateTime}>{item.dateTime}</p>
                   </div>
-                  <p className={style.dateTime}>{item.dateTime}</p>
-                  
-              </div>
-              </div>
-            );
-          })}
- 
-      </div>
+                </div>
+              );
+            })
+          )}
+        </div>
 
-      {seeMore && <Edit  selectedNote={selectedNote} handleClose={handleClose} saveNote={handleSave} />}
-     
+        {seeMore && (
+          <Edit
+            selectedNote={selectedNote}
+            handleClose={handleClose}
+            saveNote={handleSave}
+          />
+        )}
+      </div>
     </div>
   );
 };
