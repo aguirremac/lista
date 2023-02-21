@@ -68,7 +68,7 @@ return (
     
         <div className={!sidebar ? "right-[-100%] w-[250px] md:w-[300px] bg-slate-200 h-screen fixed top-0  text-black duration-300 " : "right-0 w-[250px] md:w-[300px] bg-slate-200 h-screen fixed top-0 right-0 text-black duration-300"} >
         
-        <CgCloseR onClick={()=>setSidebar(!sidebar)} className="text-3xl absolute right-3 top-3 hover:bg-yellow-100 rounded-md" />
+        <CgCloseR onClick={()=>setSidebar(!sidebar)} className="text-3xl absolute right-3 top-3 hover:bg-yellow-100 rounded-md cursor-pointer" />
 
         <div className="flex flex-col justify-center items-start pt-7 pl-5">
         <p className="text-blue-600 text-[15px] md:text-lg flex gap-2 items-center">Hi, {loggedUser.displayName}! </p>
