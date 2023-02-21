@@ -9,7 +9,9 @@ import Input from "./Input";
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {CgCloseR} from 'react-icons/cg'
 import Note from "./Note";
-import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs'
+import {RxDashboard} from 'react-icons/rx'
+import {AiOutlineQuestionCircle} from 'react-icons/ai'
+import { MdOutlineMailOutline} from 'react-icons/md'
 
 
 
@@ -19,7 +21,7 @@ const Header = () => {
      const [addNote, setAddNote] = useState(false);
      const [refresh, setRefresh] = useState(false);
      const [sidebar, setSidebar] = useState(false);
-     const [showLogout, setShowLogout] = useState(false);
+    
      
     
     
@@ -64,20 +66,20 @@ return (
     <div className="fixed z-40">
          {sidebar && <div className="bg-black/80 w-full h-screen fixed top-0 right-0 "> </div> }
     
-        <div className={!sidebar ? "right-[-100%] w-[200px] md:w-[300px] bg-slate-200 h-screen fixed top-0  text-black duration-300 " : "right-0 w-[200px] md:w-[300px] bg-slate-200 h-screen fixed top-0 right-0 text-black duration-300"} >
+        <div className={!sidebar ? "right-[-100%] w-[250px] md:w-[300px] bg-slate-200 h-screen fixed top-0  text-black duration-300 " : "right-0 w-[250px] md:w-[300px] bg-slate-200 h-screen fixed top-0 right-0 text-black duration-300"} >
         
         <CgCloseR onClick={()=>setSidebar(!sidebar)} className="text-3xl absolute right-3 top-3 hover:bg-yellow-100 rounded-md" />
 
         <div className="flex flex-col justify-center items-start pt-7 pl-5">
-        <p className="text-blue-600 text-[12px] md:text-lg flex gap-2 items-center">Hi, {loggedUser.displayName}! <span onClick={()=>setShowLogout(!showLogout)} className="cursor-pointer hover:scale-125 transition ease-in-out duration-300 ">{showLogout ? <BsFillArrowUpCircleFill /> : <BsFillArrowDownCircleFill />}</span></p>
-        {showLogout && <div onClick={handleLogOut} className="text-[15px] md:text-md flex items-center justify-center gap-1 cursor-pointer hover:scale-105 hover:text-red-600">
-        <p>Log out</p>
-        </div>}
+        <p className="text-blue-600 text-[15px] md:text-lg flex gap-2 items-center">Hi, {loggedUser.displayName}! </p>
+        
         </div>
-    <ul className="flex flex-col pt-10 pl-5 gap-2">
-        <Link className=" hover:text-red-500" to="/dashboard" onClick={()=>setSidebar(!sidebar)}>Dashboard</Link>
-        <Link className=" hover:text-red-500" to="/dashboard">About Lista</Link>
-        <Link className=" hover:text-red-500" to="/contact">Contact Us</Link>
+    <ul className="flex flex-col pt-10 pl-5 gap-2 text-[15px] md:text-md">
+        <Link className=" hover:text-red-500 flex flex-start gap-2 items-center" to="/dashboard" onClick={()=>setSidebar(!sidebar)}><RxDashboard />Dashboard</Link>
+        <Link className=" hover:text-red-500 flex flex-start gap-2 items-center" to="/dashboard"><AiOutlineQuestionCircle />About Lista</Link>
+        <Link className=" hover:text-red-500 flex flex-start gap-2 items-center" to="/contact"><MdOutlineMailOutline />Contact Us</Link>
+        <p onClick={handleLogOut} className="text-[15px] md:text-md flex items-center justify-start gap-1 cursor-pointer hover:text-red-600"><IoMdLogOut />Logout</p>
+        
     </ul>
 
 
